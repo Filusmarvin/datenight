@@ -1,0 +1,43 @@
+.userAccount{
+  box-shadow: 0px 0px 10px;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  }
+
+  .backHome{
+  position:absolute;
+  left:1200px;
+  top: 30px;
+}
+.backHome-button{
+  border: 1px solid black;
+  border-radius: 5px;
+  padding: 4px;
+  margin-left: 20px;
+}
+.userHeader{
+  border-radius: 10px;
+}
+.helloUser{
+  margin-top: 10px;
+}
+.userContainer{
+  display: flex;
+}
+.userPhoto{
+  width: 300px;
+  height: 300px;
+}
+
+.accountURL{
+  color:blue;
+}
+
+.aboutBox{
+  /*border: 1px solid black;*/
+}
+
+.about-li{
+  margin:30px;
+}

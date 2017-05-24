@@ -1,0 +1,158 @@
+
+.container{
+  margin: 70px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding: 0px;
+  box-shadow: 0px 0px 20px;
+  border-radius: 10px;
+  background: linear-gradient(to right, white, silver, white, silver, white);
+}
+
+
+.header{
+height: 100px;
+font-size: 30px;
+text-align: center;
+margin:0px;
+padding: 0px;
+}
+
+.log-button{
+  position: relative;
+  border: 1px solid black;
+  box-shadow: 0px 0px 10px;
+  border-radius: 5px;
+  right: 10px;
+  font-size: 25px;
+}
+
+
+.log-in-or-signup{
+  display: flex;
+  height: 600px;
+  background: radial-gradient(circle, white, silver, white, silver, white);
+}
+
+.users{
+  margin:5px;
+  padding: 0px;
+}
+.login{
+  width: 170px;
+  border-radius: 5px;
+}
+
+.login-button{
+  font-size: 20px;
+  border-radius: 5px;
+  background: linear-gradient(skyblue, white,skyblue)
+}
+
+.intro{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding-top: 100px;
+  background-image: url("../images/pizzacouple.jpg");
+  background-size: 641px 600px;
+  background-repeat: no-repeat;
+  width: 50%;
+  text-align: center;
+  font-size: 20px;
+  margin:0px;
+  padding:0px;
+  opacity: .8;
+}
+.intro-words{
+  display: flex;
+  color: black;
+  font-size: 25px;
+}
+.intro-ul{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  list-style: none;
+}
+.intro-ul li {
+  margin:20px;
+}
+
+.logInOrSignUp{
+background-image: url("../images/feedme.jpg") ;
+background-size: 641px 600px;
+background-repeat: no-repeat;
+text-align: center;
+width: 50%;
+font-size: 30px;
+display: flex;
+flex-direction: column;
+justify-content: space-around;
+}
+
+.right-side{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.facebook-button{
+  position: relative;
+  left: 190px;
+  width: 250px;
+  background-color: lightgrey;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+div{
+  padding:0px;
+  margin:0px;
+}
+
+.bottom-section{
+  display: flex;
+  flex-direction: row;
+  background: linear-gradient(to right, white, silver, white, silver, white);
+  height: 300px;
+  width: 100%;
+}
+
+.div-box{
+  border-radius: 10px;
+  width:25%;
+}
+
+.box-1{
+  background-image: url("../images/pizzacouple.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: -80px 0px;
+
+}
+
+.box-2{
+  background-image: url("../images/Coffee.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+
+}
+
+.box-3{
+  background-image: url("../images/redhead.jpg");
+  background-repeat: no-repeat;
+  background-position: -120px 0px;
+  background-size: cover;
+
+}
+
+.box-4{
+  background-image: url("../images/feedme.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.fb-like{
+  width: 450px;
+  height: 430px;
+  background-color: red;
+}

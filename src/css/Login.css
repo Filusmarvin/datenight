@@ -1,21 +1,26 @@
 
+
 .container{
   margin: 70px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 0px;
   box-shadow: 0px 0px 20px;
-  border-radius: 10px;
-  background: linear-gradient(to right, white, silver, white, silver, white);
+  /*border-radius: 10px;*/
+  /*background: linear-gradient(to right, white, silver, white, silver, white);*/
 }
 
 
 .header{
 height: 100px;
 font-size: 30px;
+color: white;
 text-align: center;
 margin:0px;
 padding: 0px;
+position: fixed;
+top: -25px;
+left: 400px;
 }
 
 .log-button{
@@ -31,7 +36,8 @@ padding: 0px;
 .log-in-or-signup{
   display: flex;
   height: 600px;
-  background: radial-gradient(circle, white, silver, white, silver, white);
+  /*background: radial-gradient(circle, white, silver, white, silver, white);*/
+  /*border-radius: 10px;*/
 }
 
 .users{
@@ -51,10 +57,10 @@ padding: 0px;
 
 .intro{
   display: flex;
+  border-radius: 10px;
   flex-direction: column;
   justify-content: space-around;
   padding-top: 100px;
-  background-image: url("../images/pizzacouple.jpg");
   background-size: 641px 600px;
   background-repeat: no-repeat;
   width: 50%;
@@ -62,7 +68,6 @@ padding: 0px;
   font-size: 20px;
   margin:0px;
   padding:0px;
-  opacity: .8;
 }
 .intro-words{
   display: flex;
@@ -80,7 +85,7 @@ padding: 0px;
 }
 
 .logInOrSignUp{
-background-image: url("../images/feedme.jpg") ;
+border-radius: 10px;
 background-size: 641px 600px;
 background-repeat: no-repeat;
 text-align: center;

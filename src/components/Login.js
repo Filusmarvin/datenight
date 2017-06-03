@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom'
 import '../css/Login.css'
-
-
-
-
 
 class Login extends Component {
   constructor() {
@@ -36,22 +33,15 @@ class Login extends Component {
                 <div>
                   <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
                 </div>
-                <p> If you want to sign in using a different account, <a href="facebook.com"> Click Here </a>
-                to log out of your facebook account then sign back in. </p>
-                <a href="//facebook.com" target="_blank" className="facebook-button"> Sign Out Here </a>
+                <p> Sign up for an account here!  </p>
+                <Link to="/signup" target="_blank" className="facebook-button"> Sign Up </Link>
               </div>
+              <h6> If you want to log in using a different <br />account just sign out of your facebook.
+              <br /> <br /> Go to <a href="//www.Facebook.com" target="_blank"> Facebook </a>
+              </h6>
             </div>
           </div>
-          <div className="bottom-section">
-          <div className="div-box box-1"></div>
-          <div className="div-box box-2">
-          <video width="100" height="100" controls>
-            <source src="What-do-you-want.mp4" type="video/mp4"/>
-          </video>
-          </div>
-          <div className="div-box box-3"></div>
-          <div className="div-box box-4"></div>
-          </div>
+
         </div>
       </container>
     );

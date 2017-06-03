@@ -1,14 +1,19 @@
+img{
+  width: 20px;
+  height: 20px;
+}
+
+
 .userAccount{
-  box-shadow: 0px 0px 10px;
-  margin: 10px;
-  padding: 10px;
-  border-radius: 10px;
+  padding-top: 0px;
+  position: inherit;
+  top:100px;
   }
 
   .backHome{
   position:absolute;
   left:1200px;
-  top: 30px;
+  top: 10px;
 }
 .backHome-button{
   border: 1px solid black;
@@ -17,27 +22,214 @@
   margin-left: 20px;
 }
 .userHeader{
-  border-radius: 10px;
+  width: 1440px !important;
+  height: 200px;
+  background-color: #00ffbf;
+  margin: 0px;
+  border: .1px solid #f3f5f9;
+  display: flex;
+  padding-left: 9px;
 }
+
+.bio{
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  top: 0px;
+  left: 200px;
+  color: white;
+  width:850px;
+}
+
+.edit-logo{
+  height: 20px;
+  width:20px;
+  border-radius: 5px;
+}
+
+.summary-div{
+  height: 35px;
+}
+.summary-div:hover{
+  background-color: #2098d1;
+
+  border-radius: 5px;
+}
+.bio-header{
+  text-align: center;
+}
+
+.bio-box{
+  position: relative;
+  text-align: center;
+  right:200px;
+  /*display: flex;
+  flex-wrap: wrap;*/
+  width:80%;
+}
+
+.bio-input{
+  width: 400px;
+  height: 90px;
+  background-color: #f3f5f9;
+  font-size: 18px;
+  padding-left:0;
+  padding-top:0;
+  padding-bottom:0.4em;
+  padding-right: 0.4em;
+}
+.bio-button{
+  position: relative;
+  top: 15px;
+  right: 405px;
+  width:200px;
+}
+.bio-cancel-button{
+  position: relative;
+  top:15px;
+  right:405px;
+  width:200px;
+}
+.bio-h1{
+  color:white;
+}
+
+.bio-info{
+width: 800px;
+}
+
+.pic-name{
+  width: 370px;
+}
+
+
 .helloUser{
-  margin-top: 10px;
+  font-size: 40px;
+  color: #f3f5f9;
+  margin: 0px;
+  padding: 0px;
+  width: 100%;
 }
 .userContainer{
   display: flex;
 }
 .userPhoto{
-  width: 300px;
-  height: 300px;
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  position: relative;
+  left: 0px;
+}
+
+.user-info{
+  font-size: 20px;
+  color: #00ffbf;
+}
+.aboutBox-h1{
+  text-align: center;
+}
+
+.about-form{
+  display: flex;
+}
+.about-li{
+  margin:30px;
+  font-size: 20px;
 }
 
 .accountURL{
   color:blue;
 }
 
-.aboutBox{
-  /*border: 1px solid black;*/
+.extra-text{
+  font-size: 20px;
 }
 
-.about-li{
-  margin:30px;
+.extra-text-box{
+  opacity: .2;
+  width: 500px;
+  height: 100px;
+}
+
+.extra-text-box:active{
+  opacity: 1;
+  width: 500px;
+  height: 100px;
+}
+
+.extra-text-box:focus{
+  opacity: 1;
+  width: 500px;
+  height: 100px;
+}
+
+.save-extra-button{
+  position: relative;
+  width: 150px;
+  top: 15px;
+  right: 300px;
+}
+
+.movie-category{
+  margin-left: 70px;
+}
+
+.search-field{
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-box{
+  border-radius: 10px;;
+  box-shadow: 0px 0px 1px;
+  padding: 10px;
+  width: 425px;
+}
+
+.search-input{
+  width: 200px;
+  border-radius: 5px;
+}
+
+.search-title{
+  text-align: center;
+}
+
+.input-and-button{
+  text-align: center;
+}
+
+.Search{
+  /*position: absolute;*/
+  z-index: 0;
+  border: 1px solid black;
+  border-radius: 10px;
+  padding: 5px;
+  font-size: 20px;
+  top: 200px;
+  left: 600px;
+}
+
+.more-users-info{
+  color: #00ffbf;
+}
+
+.email-city{
+  width:250px;
+}
+
+
+.interesting p {
+  font-size: 20px;
+  width: 500px;
+}
+
+.interesting h2{
+  padding-top:30px;
+}
+
+.edit-info-logo:hover{
+  width:30px;
+  height: 30px;
+  transition: 1s;
 }

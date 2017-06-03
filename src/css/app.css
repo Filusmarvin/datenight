@@ -1,4 +1,9 @@
-ul{
+body{
+
+  width: 1440px;
+}
+
+  ul{
   list-style: none;
 }
 
@@ -28,4 +33,39 @@ a:hover {
 a:active {
     color: black;
     text-decoration: none;
+}
+
+.menu{
+  height: 30px;
+  width: 30px;
+  border-radius: 10px;
+}
+
+.main-head{
+  z-index: 100;
+  position: sticky;
+  margin-bottom: 0px;
+  background-color: #104da1;
+  width: 1450px;
+  height:100px;
+  left: -10px;
+  top: -10px;
+}
+
+.logo{
+  position: relative;
+  top: 30px;
+  left: 20px;
+}
+
+.logo-image{
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.header-nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }

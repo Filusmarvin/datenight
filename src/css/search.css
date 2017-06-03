@@ -1,3 +1,43 @@
 .search-header{
   text-align: center;
 }
+
+.hidden{
+  display: none;
+}
+
+.displaySearch{
+  width: 400px;
+  height: 500px;
+  margin: 20px;
+}
+
+.each-movie{
+  margin-top: 50px;
+}
+
+.sign-out-button{
+  position: absolute;
+  left: 1200px;
+}
+
+.three-boxes{
+  display: flex;
+}
+
+.each-place{
+  display: flex;
+}
+
+.place-image{
+  width: 70px;
+  height:70px;
+}
+
+
+/*  Every thing dealing with the hover affect for each Genre Li*/
+.genre-li{
+  border: 1px solid black;
+  margin: 5px;
+  width: 90px;
+}

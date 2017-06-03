@@ -1,0 +1,64 @@
+.all-users{
+  margin: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1000px;
+  justify-content: center;
+  margin-left: 200px;
+  margin-right: 200px;
+}
+
+.user-pic{
+  background-color: white;
+  display: flex;
+  border: 1px solid black;
+  flex-direction: column;
+  width: 250px;
+  /*height: 300px;*/
+  margin:30px;
+  border-radius: 5px;
+}
+
+.mini-bio{
+  display:flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.pic{
+  display: flex;
+  width: 250px;
+  border-radius: 5px;
+}
+.profile-pic{
+  width: 250px;
+  height:250px;
+  border-radius: 5px;
+}
+
+.age-name{
+  display: flex;
+  justify-content: space-around;
+}
+
+.verticle{
+  border: 1px solid lightgrey;
+  opacity: .5;
+  height: 50px;
+}
+
+.movie-restaurant{
+  display: flex;
+  justify-content: space-around;
+}
+
+.search-users{
+  /*position: relative;*/
+  text-align: center;
+  left:500px;
+}
+
+.user-input{
+  width: 300px;
+  border-radius: 4px;
+}

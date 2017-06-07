@@ -4,7 +4,7 @@ import {Redirect} from 'react-router'
 import '../css/hover.css';
 import '../css/app.css'
 import Login from './Login.js'
-import Footer from  './Footer.js'
+// import Footer from  './Footer.js'
 import Signup from './SignUp.js'
 import Home from './Home.js'
 import {base , app } from '../rebase';
@@ -14,7 +14,7 @@ import Search from './Search.js'
 import axios from 'axios'
 import UserProfile from './UserProfile.js'
 import Common from './Common.js'
-let eventKey = "kzLJCk4t3WPN7Pk5."
+let eventKey = "kzLJCk4t3WPN7Pk5"
 
 var provider = new firebase.auth.FacebookAuthProvider();
 
@@ -26,7 +26,7 @@ class App extends Component {
       users:{ genre:false },
       uid:"",
       movies:[],
-      boo: true,
+      // boo: true,
       location:{}
     }
   }
@@ -75,13 +75,13 @@ class App extends Component {
           uid: user.uid
         }
       })
-    } else { null }
+    }
 
     base.fetch(`user/${uid}`,{
       context:this,
       asArray:false,
       then(data){
-        console.log(user,data)
+        // console.log(user,data)
         this.setState({
           user: {...user, ...data}
         })
@@ -156,38 +156,37 @@ displayName () {
   }
   button(){
     return axios.get(`http://eventful.com/events?q=hiphop&l=San+Diego&t=This+Weekend&c=music&app_key=${eventKey}`)
-    .then(obj => console.log(obj))
+    // .then(obj => console.log(obj))
   }
 
   // <Route exact path={`/signup`} render={(pickles) => ( !genre ?
   // ( <Signup user={this.state.user} movie={this.state.movie} updateState={this.updateState.bind(this)}
   // setUserState={this.setUserState} user={this.state.user} changeBoo={this.changeBoo.bind(this)}
   // {...pickles} /> ) : (<Redirect to={`/user/${uid}`} />))} />
-
+  getEvents(location) {
+      axios.get(`https://tiy-orl-proxy.herokuapp.com/eventful?app_key=V5W6PxsWgHLxCZTb&where=${location[1]},${location[2]}&within=25&date=Next%20Week&sort_order=popularity`)
+      .then(response => this.setState({ localEvents: response.data.events.event }))
+    }
 
   render() {
     let loggedin = app.auth().currentUser ? true : false
     let uid = this.state.user.uid
-    let boo = this.state.boo === true ? true : false
-    let genre = this.state.user.genre ? true : false
     let user = this.state.user
-    let info = this.state.user.genre ? true : false
-    console.log(this.state.user.genre)
+
     return (
       <Router>
       <div>
 
       <header className="main-head">
       <div className="logo" >
-        <Link to="/home" > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /> DND </Link>
+        <Link to="/home" > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
       </div>
       <nav className="header-nav">
-        <Link to="/Home" className="hvr-grow"> Browse users </Link>
-        <Link to={`/user/${uid}`} className="hvr-grow"> My Account</Link>
-        <Link to={`/user/${uid}/search`}className="hvr-grow"> Search places </Link>
-         <p onClick={this.logOut.bind(this)}><Link to="/" className="hvr-grow"> Log Out </Link> </p>
+        <Link to="/Home" className="hvr-grow header-name"> Browse users </Link>
+        <Link to={`/user/${uid}`} className="hvr-grow header-name"> My Account</Link>
+        <Link to={`/user/${uid}/search`}className="hvr-grow header-name"> Search places </Link>
+         <span onClick={this.logOut.bind(this)}><Link to="/" className="hvr-grow header-name"> Log Out </Link> </span>
         <img className="menu" src={user.photoURL} alt="" />
-        <button onClick={this.button.bind(this)}> click me</button>
       </nav>
       </header>
         <Route exact path="/" render={(pickles) =>( loggedin ? ( <Redirect to={`/signup/${uid}`} />) :

@@ -10,5 +10,21 @@ var app = firebase.initializeApp({
     messagingSenderId: "70114222789"
   });
 
+  const messaging = firebase.messaging();
+  messaging.requestPermission().then(function (){
+    console.log('Have permission');
+    return messaging.getToken();
+  })
+  .then(function(token){
+    console.log(token)
+  })
+  .catch(function (err){
+    console.log("error caught")
+  });
+
+  messaging.onMessage(function(payload){
+    payload('onMessage', payload)
+  })
+
 var base = Rebase.createClass(app.database());
 export{ base , app }

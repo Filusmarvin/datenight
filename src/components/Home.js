@@ -19,7 +19,6 @@ class Home extends Component {
         asArray: true,
         then(data){
           this.setState({ users: data})
-          console.log(this.state.users)
         }
       })
       base.fetch(`user/${this.state.user.uid}` ,{
@@ -27,7 +26,6 @@ class Home extends Component {
         asArray: false,
         then(data){
           this.setState({ user: [data]})
-          console.log(this.state.user)
         }
       })
     }
@@ -59,16 +57,15 @@ class Home extends Component {
     })
   }
   button(e){
-    e.preventDefault()
-    let text = this.text.value
-    let age = this.age.value
-    let lastName = this.lastName.value
-    let ethnicity = this.ethnicity.value
-    console.log(text)
-  }
+  //   e.preventDefault()
+  //   let text = this.text.value
+  //   let age = this.age.value
+  //   let lastName = this.lastName.value
+  //   let ethnicity = this.ethnicity.value
+ }
 
   searchUser(){
-    let user = this.input.value
+    // let user = this.input.value
     // this.state.users.filter( )
   }
 

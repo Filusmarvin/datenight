@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
- // import {Link } from 'react-router-dom'
+ import {Link } from 'react-router-dom'
 import axios from 'axios'
 import '../css/search.css'
+import {base } from '../rebase';
 const movieKey = "81599007ff214265c13a0888da791d0c"
 // const dinnerKey = "31060f9bfe02586b"
 // const dinKey ="179f6b05297ee5efce0b417a891b2dc5"
@@ -17,17 +18,33 @@ class UserAccount extends Component{
       genre:"",
       place:"",
       date:"",
-      location:{}
+      location:{},
+      favMovies:[],
+      alreadyWatched:[],
+      favoriteLocations:[]
     }
   }
 
   componentDidMount () {
+    let uid = this.props.match.params.uid
     axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAhoxu3waM5qMIQHwXGZ4Gcq7VuDcRohtU")
     .then(obj => {
       this.setState({
         location:obj.data.location
       })
     })
+
+    base.fetch(`user/${uid}/favMovies`,{
+      context:this,
+      asArray:false,
+      then(data){
+        this.setState({
+          favMovies: [data]
+        })
+        console.log(this.state.favMovies)
+      }
+    })
+
   }
 
 
@@ -39,6 +56,29 @@ class UserAccount extends Component{
     }
   }
 
+  //  Add to firebase
+
+  addToDo(movie){
+    let uid = this.props.match.params.uid
+    console.log(movie.title);
+    base.update(`user/${uid}/wantToWatch`, {
+      data: { movie: movie.title,
+            released : movie.release_date,
+            movieId: movie.id
+      }
+    })
+  }
+
+  addToFav(movie){
+    let uid = this.props.match.params.uid
+    console.log(movie.title);
+    base.update(`user/${uid}/favMovies`, {
+      data: { movie: movie.title,
+            released : movie.release_date,
+            movieId: movie.id
+      }
+    })
+  }
 
 
 // Api Search Calls
@@ -86,14 +126,16 @@ class UserAccount extends Component{
     let movies = this.state.movies
     // console.log(movies)
     if(movies !== ""){
-      return movies.map((movie,index) => {
+      return movies.splice(0,10).map((movie,index) => {
         return(
           <div className="each-movie" key={index}>
-            <img src={movie.backdrop_path} alt="this" />
             <li> Movie Name: {movie.title} </li>
             <li>Movie Id: {movie.id}</li>
+            <li>Released date: {movie.release_date}</li>
             <li> Votes: {movie.vote_average} and Vote count {movie.vote_count}</li>
-            <button onClick={this.addToDo.bind(this)}> Add to do </button>
+            <button onClick={this.addToDo.bind(this, movie)}> Add to must watch </button>
+            <button onClick={this.addToFav.bind(this , movie)}>  Favorites </button>
+            <p><Link to={`https://www.themoviedb.org/search?language=en-US&query=${movie.title}`} target="_blank"> View More About Movie</Link></p>
           </div>
         )
       })
@@ -106,12 +148,14 @@ class UserAccount extends Component{
     if(genre !== ""){
       return genre.map((genre, index) => {
         return(
-          <div className="eachgenre" key={index}>
-            <img src={genre.backdrop_path} alt="this" />
+          <div className="each-genre" key={index}>
             <li>Movie Name: {genre.title} </li>
             <li>Movie Id: {genre.id}</li>
+            <li>Released date: {genre.release_date}</li>
             <li> Votes: {genre.vote_average} and Vote count {genre.vote_count}</li>
             <button onClick={this.addToDo.bind(this)}> Add to do </button>
+            <button onClick={this.addToFav.bind(this , genre)}>  Favorites </button>
+            <p><Link to={`https://www.themoviedb.org/search?language=en-US&query=${genre.title}`} target="_blank"> View More About Movie</Link></p>
           </div>
         )
       })
@@ -139,15 +183,12 @@ class UserAccount extends Component{
     }
   }
 
-  //  Add to firebase
 
-  addToDo(){
-    null
-  }
 
   render()
   {
     const user = this.props.user
+    const fav =  this.state.favMovies
 
     return (
       <div>
@@ -156,16 +197,27 @@ class UserAccount extends Component{
         </header>
 
 
-        <div>
-          <button className="sign-out-button" onClick={this.props.logOut.bind(this)}> Sign Out </button>
-          <img src={user.photoURL ? user.photoURL : null} className="userPhoto" alt="Profile"/>
-          <h2> Your Favorite Movie is {user.movie} </h2>
-          <p>Here are more movies based on your favorite Movie</p>
-          <div>
-            <p>His Movie</p>
-            <input type="text" ref={(input) => {this.hisInput = input}}/>
-            <p>Her Movie</p>
-            <input type="text" ref={(input) => {this.herInput = input}}/>
+        <div className='under-header-div'>
+          <div className="image-div">
+            <h2>{user.firstName} {user.lastName}</h2>
+            <img src={user.photoURL ? user.photoURL : null} className="userPhoto" alt="Profile"/>
+            <h2> Your Favorite Movie is  </h2>
+            <h3 className="h3-div">{user.movie}</h3>
+          </div>
+
+          <div className="favorite-movies">
+            <h2> Some favorite Movies </h2>
+            {fav.map((movies , index) => {
+              return(
+                <div key={index}>
+                  <p>Name:{movies.movie}</p>
+                </div>
+              )
+            })}
+            {fav.movie}
+          </div>
+          <div className="favorite-locations">
+            <h2> Favorite Locations </h2>
           </div>
         </div>
 

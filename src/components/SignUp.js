@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import  { Link } from 'react-router-dom'
+// import  { Link } from 'react-router-dom'
 import { base } from '../rebase';
 import '../css/Signup.css'
 // import data from '../components/data.json'
@@ -47,7 +47,6 @@ class Signup extends Component {
    let firstName = this.firstName.value
    let lastName = this.lastName.value
    let age = this.age.value
-   gender
    let city = this.city.value
    let ethnicity = this.ethnicity.value
    let restaraunt = this.restaraunt.value

@@ -1,5 +1,4 @@
 body{
-
   width: 1440px;
 }
 
@@ -35,6 +34,24 @@ a:active {
     text-decoration: none;
 }
 
+.header-name:active{
+  color:white;
+}
+.header-name:focus{
+  color:white;
+}
+.header-name:hover{
+  color:white;
+}
+.header-name:visited{
+  color:white;
+}
+.header-name{
+  color:white;
+  font-size: 20px;
+}
+
+
 .menu{
   height: 30px;
   width: 30px;
@@ -50,6 +67,7 @@ a:active {
   height:100px;
   left: -10px;
   top: -10px;
+  color:white;
 }
 
 .logo{
@@ -68,4 +86,5 @@ a:active {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  color: white;
 }

@@ -35,9 +35,41 @@
 }
 
 
-/*  Every thing dealing with the hover affect for each Genre Li*/
+.each-genre{
+  margin-top: 30px;
+}
+
+.image-div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%
+}
+
+.h3-div{
+  text-align: center;
+}
 .genre-li{
   border: 1px solid black;
   margin: 5px;
   width: 90px;
+}
+
+.under-header-div{
+  display: flex;
+}
+
+.favorite-movies{
+  width:33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.favorite-locations{
+  width:33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

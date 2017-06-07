@@ -51,3 +51,48 @@ border: 1px solid black;
 width: 33%;
 border: 1px solid black;
 }
+.right-part{
+  position:relative;
+  left:300px;
+  top:-260px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+    width: 400px;
+}
+
+.left-part{
+  position:absolute;
+  left: 750px;
+  top: 135px;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+    width: 400px;
+
+}
+
+.left-words{
+  font-size: 20px;
+  width: 400px;
+}
+.right-words{
+  font-size: 20px;
+  width: 400px;
+}
+
+.left-words span{
+  color: #ff6699;
+}
+.right-words span{
+  color: #ff6699;
+}
+
+.movie-results{
+  margin: 20px;
+  margin-bottom: 40px;
+}
+
+.movie-url{
+  color:#ff6699;
+}

@@ -8,12 +8,17 @@ img{
   padding-top: 0px;
   position: inherit;
   top:100px;
+
   }
 
   .backHome{
   position:absolute;
   left:1200px;
   top: 10px;
+}
+
+.about-li:hover{
+  background-color: #f3f5f9;
 }
 .backHome-button{
   border: 1px solid black;

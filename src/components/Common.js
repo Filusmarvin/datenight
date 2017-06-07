@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import  { Link } from 'react-router-dom';
-import {base } from '../rebase';
+// import {base } from '../rebase';
 import axios from 'axios'
 import '../css/common.css';
 const movieKey = "81599007ff214265c13a0888da791d0c";
@@ -33,8 +33,8 @@ class Common extends Component {
       const uid = this.props.match.params.uid
       const users = this.props.users
       const user = this.props.user
-      const herIds = this.state.herIds
-      const hisIds = this.state.hisIds
+      // const herIds = this.state.herIds
+      // const hisIds = this.state.hisIds
 
       // if(this.props.users[uid]){
         return axios.get(`https://api.themoviedb.org/3/search/movie?api_key=${movieKey}&query=${users[uid].movie}&total_results=10`)
@@ -59,7 +59,7 @@ class Common extends Component {
       // console.log(obj , this.state.herIds )
       for ( var i = 0; i < herIds.length; i++) {
           for (var  j = 0; j < hisIds.length; j++) {
-      if (herIds[i] == hisIds[j]) {
+      if (herIds[i] === hisIds[j]) {
         console.log(herIds[i])
         return axios.get(`https://api.themoviedb.org/3/genre/${herIds[i]}/movies?api_key=${movieKey}&sort_by=created_at.asc`).then(
           obj => this.setState({ ourMovies : obj.data.results}))
@@ -77,11 +77,12 @@ class Common extends Component {
     renderMovies(){
       return this.state.ourMovies.slice(0 ,5).map((movie,index) => {
         return (
-          <div key={index}>
-          <img src={movie.backdrop_path} alt="Movies" />
+          <div className="movie-results" key={index}>
             <p> Movie Title: {movie.title} </p>
             <p> Movie Popularity: {movie.popularity}</p>
-            <p> This was released {movie.released_date}</p>
+            <p> This was released {movie.release_date}</p>
+            <Link to={`//www.google.com/#safe=strict&q=${movie.title}+movie+near+me`} target="_blank">
+            <span className="movie-url hvr-grow" >Find movie near you </span> </Link>
           </div>
 
         )
@@ -91,16 +92,20 @@ class Common extends Component {
     about(){
       const users = this.props.users
       const uid = this.props.match.params.uid
+      // const user = this.props.user
       if(this.props.users[uid] && this.props.user.uid ){
         return(
-          <div className="sub-right">
-            <p>{users.displayName}</p>
-            <img className="user-photo" src={users[uid].photoURL} alt="pic"/>
-            <p> {users[uid].firstName}  {users[uid].lastName} </p>
-            <p> {users[uid].email} </p>
-            <div>
-            <button onClick={this.thereMovies.bind(this)}> View more movies </button>
-              Favorite Movie is {users[uid].movie}
+          <div>
+            <div className="sub-right">
+              <p>{users[uid].displayName}</p>
+              <img className="user-photo" src={users[uid].photoURL} alt="pic"/>
+              <p> {users[uid].firstName}  {users[uid].lastName} </p>
+                <div className="left-part">
+                <p className="right-words"> Age <span> I am {users[uid].age} years old.</span> </p>
+                <p className="right-words"> Restaraunt <span> I like to eat at {users[uid].restaraunt} </span> </p>
+                <p className="right-words"> Movie <span> My favorite movie is { users[uid].movie }</span> </p>
+                <p className="right-words"> Ethnicity <span> My ethnicity is {users[uid].ethnicity}</span> </p>
+              </div>
             </div>
           </div>
         )
@@ -112,16 +117,18 @@ class Common extends Component {
     const uid = this.props.match.params.uid
     const users = this.props.users
     const user = this.props.user
-    console.log(this.state.ourMovies)
+    console.log(uid, users[uid])
     return(
       <div className="common-container">
         <div className="myleft-side">
           <p> {user.displayName}</p>
           <img className="user-photo" src={user.photoURL} alt="pic"/>
           <p> {user.firstName}  {user.lastName} </p>
-          <p> {user.email} </p>
-          <div>
-            Favorite movie is {user.movie}
+          <div className="right-part">
+            <p className="left-words"> Age <span> I am {user.age} years old. </span> </p>
+            <p className="left-words"> Restaraunt <span> I like to eat at {user.restaraunt}  </span> </p>
+            <p className="left-words"> Movie <span> My favorite movie is { user.movie } </span> </p>
+            <p className="left-words"> Ethnicity <span> My ethnicity is {user.ethnicity}  </span> </p>
           </div>
         </div>
         <div className="myright-side">

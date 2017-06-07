@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link } from 'react-router-dom';
+// import {Link } from 'react-router-dom';
 // import { app } from '../rebase';
 import "../css/useraccount.css";
 import { base } from '../rebase';
@@ -38,17 +38,17 @@ class UserAccount extends Component{
   }
 
   addBio(e){
-    e.preventDefault()
+    // e.preventDefault()
     let uid = this.props.user.uid
     let text = e.target.previousSibling.value
+    this.setState({
+      user:{...this.state.user, bio: text }
+  })
     base.update(`user/${uid}`, {
       data:{
         bio: text
       }
-    })
-      this.setState({
-        user:{...this.state.user, bio: text }
-    })
+    }).then( location.reload())
   }
 
   updateBio(){
@@ -71,7 +71,7 @@ class UserAccount extends Component{
        <h1 className="bio-h1"> Tell me about yourself! </h1>
         <form onSubmit={this.addBio.bind(this)}>
           <textarea className="bio-input" type="text"
-          ref={(textarea) => {this.text = textarea}}/>
+          ref={(textarea) => {this.text = textarea} }/>
           <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>
           <button onClick={this.updateBio.bind(this) } className="bio-cancel-button"> Cancel</button>
         </form>
@@ -82,7 +82,7 @@ class UserAccount extends Component{
   showBio(){
     return(
       <div className="bio-box">
-      <h1 className="bio-header" onClick={this.editBio.bind(this)}className="summary-div"> My Self Summary <img className="edit-logo" src={require('../images/edit.png')} alt="logo" /> </h1>
+        <h1 className="bio-header summary-div " onClick={this.editBio.bind(this)}> My Self Summary <img className="edit-logo" src={require('../images/edit.png')} alt="logo" /> </h1>
         <h2 className="bio-info"> {this.props.user.bio} </h2>
       </div>
     )
@@ -139,6 +139,10 @@ class UserAccount extends Component{
 
   }
 
+  editInfo(e){
+    console.log(e.target.id)
+  }
+
   render () {
     const user = this.state.user
     return (
@@ -168,14 +172,14 @@ class UserAccount extends Component{
                 <h1 className="aboutBox-h1">About {user.displayName}</h1>
                 <form className="about-form">
                   <div>
-                    <li className="about-li">  My name is: <img src={require('../images/edit.png')} alt="logo" /> <span className="user-info">{user.firstName} {user.lastName}</span>  </li>
-                    <li className="about-li"> I am  <span className="user-info">{user.age}</span> years old <img src={require('../images/edit.png')} alt="logo" /> </li>
-                    <li className="about-li"> Ethnicity: <span className="user-info">{user.ethnicity}</span>  </li>
+                    <li className="about-li" onClick={this.editInfo.bind(this)}>  My name is: <span id="" className="user-info">{user.firstName} {user.lastName}</span>  <img id="" src={require('../images/edit.png')} alt="logo" /></li>
+                    <li className="about-li" id="age" onClick={this.editInfo.bind(this)}> I am  <span id="age" className="user-info">{user.age}</span> years old <img id="age"src={require('../images/edit.png')} alt="logo" /> </li>
+                    <li className="about-li" id="ethnicity" onClick={this.editInfo.bind(this)}> Ethnicity: <span id="ethnicity" className="user-info">{user.ethnicity}</span>  <img id="ethnicity" src={require('../images/edit.png')} alt="logo" /></li>
                   </div>
                   <div>
-                    <li className="about-li"> Restaraunt: <span className="user-info">{user.restaraunt}</span>  </li>
-                    <li className="about-li"> Hobby: <span className="user-info">{user.hobby}</span>  </li>
-                    <li className="about-li"> Favorite Movie <span className="user-info">{user.movie}</span> </li>
+                    <li className="about-li" id="restaurant" onClick={this.editInfo.bind(this)}> Restaraunt: <span id="restaraunt" className="user-info">{user.restaraunt}</span>  <img id="restaraunt" src={require('../images/edit.png')} alt="logo" /></li>
+                    <li className="about-li" id="hobby" onClick={this.editInfo.bind(this)}> Hobby: <span id="hobby" className="user-info">{user.hobby}</span>  <img id="hobby" src={require('../images/edit.png')} alt="logo" /></li>
+                    <li className="about-li" id="movie" onClick={this.editInfo.bind(this)}> Favorite Movie <span id="movie" className="user-info">{user.movie}</span> <img id="movie" src={require('../images/edit.png')} alt="logo" /></li>
                   </div>
                 </form>
               </div>

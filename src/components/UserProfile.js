@@ -26,7 +26,6 @@ class UserProfile extends Component {
     }
 
   render(){
-    const userId = this.props.match.params.index
     const user = this.state.user
     const uid = this.props.match.params.uid
     const index = this.props.match.params.index

@@ -11,11 +11,12 @@ var app = firebase.initializeApp({
   });
 
   const messaging = firebase.messaging();
-  messaging.setBackgroundMessageHandler(funciton(payload){
+  messaging.setBackgroundMessageHandler(function(payload){
     const title = "hello world"
     const options = {
       body: payload.data.status
     }
-    return self.registration.showNotification(title , options);
     console.log("payload")
+    return self.registration.showNotification(title , options);
+
   })

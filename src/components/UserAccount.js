@@ -15,7 +15,8 @@ class UserAccount extends Component{
     super();
     this.state = {
       user:{ restaraunt:"" },
-      movies: []
+      movies: [],
+      change: false
     }
   }
 
@@ -70,7 +71,7 @@ class UserAccount extends Component{
        <div>
        <h1 className="bio-h1"> Tell me about yourself! </h1>
         <form onSubmit={this.addBio.bind(this)}>
-          <textarea className="bio-input" type="text"
+          <textarea className="bio-input" type="text" placeholder=" Write something interesting about yourself. Don't let them know too much about you but let them know what you are about :) "
           ref={(textarea) => {this.text = textarea} }/>
           <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>
           <button onClick={this.updateBio.bind(this) } className="bio-cancel-button"> Cancel</button>
@@ -93,6 +94,53 @@ class UserAccount extends Component{
     this.setState({
       user: {...user, bio: null}
     })
+  }
+
+  showAge(){
+    let user = this.state.user
+    return(
+      <li className="about-li" id="age" onClick={this.editInfo.bind(this)}> I am  <span id="age" className="user-info">{user.age}</span> years old <img id="age"src={require('../images/edit.png')} alt="logo" /> </li>
+    )
+  }
+
+  showEthnicity(){
+    let user = this.state.user
+    return(
+      <li className="about-li" id="ethnicity" onClick={this.editInfo.bind(this)}> Ethnicity: <span id="ethnicity" className="user-info">{user.ethnicity}</span>  <img id="ethnicity" src={require('../images/edit.png')} alt="logo" /></li>
+    )
+  }
+
+  showRestaurant(){
+    let user = this.state.user
+    return(
+      <li className="about-li" id="restaurant" onClick={this.editInfo.bind(this)}> Restaraunt: <span id="restaraunt" className="user-info">{user.restaraunt}</span>  <img id="restaraunt" src={require('../images/edit.png')} alt="logo" /></li>
+    )
+  }
+
+  showHobby(){
+    let user = this.state.user
+    return(
+      <li className="about-li" id="hobby" onClick={this.editInfo.bind(this)}> Hobby: <span id="hobby" className="user-info">{user.hobby}</span>  <img id="hobby" src={require('../images/edit.png')} alt="logo" /></li>
+    )
+  }
+
+  showMovie(){
+    let user = this.state.user
+    return(
+      <li className="about-li" id="movie" onClick={this.editInfo.bind(this)}> Favorite Movie <span id="movie" className="user-info">{user.movie}</span> <img id="movie" src={require('../images/edit.png')} alt="logo" /></li>
+    )
+  }
+
+  editInfo(e){
+    let user = this.state.user
+    let id = e.target.id
+    this.enterInfo(id)
+  }
+
+  enterInfo(id){
+    let name = document.querySelector('.change')
+
+
   }
 
   goals(){
@@ -121,30 +169,36 @@ class UserAccount extends Component{
   }
 
   getPic(){
-    // this.setState({ user : { ...this.state.user, ...this.props.user}})
+
   }
 
   showPic(){
     const user = this.state.user
     return (
     <div className="pic-name">
-      <h1 className="helloUser"> {user.uid ? user.displayName : 'User'}  </h1>
-      <img src={user.photoURL ? user.photoURL : null} className="userPhoto" alt="Profile"/>
-    </div>)
+    <h1 className="helloUser"> {user.uid ? user.displayName : 'Hello User'}  </h1>
+      <div className="pic-info">
+        <div>
+          <img src={user.photoURL ? user.photoURL : null} className="userPhoto" alt="Profile"/>
+        </div>
+        <div className='email-city'>
+          <p className="email-p one-p">Email: {user.email}</p>
+          <p className="email-p two-p"> View <a href={`//www.facebook.com`} target="_blank"><span className="accountURL ">{user.displayName}</span></a> Facebook </p>
+          <p className="email-p three-p"> City: <span className="user-info">{user.city}</span>   </p>
+        </div>
+        </div>
+    </div>
+    )
   }
 
   editExtra(e){
     let clicked = e.target.querySelector('form')
     console.log(clicked)
-
-  }
-
-  editInfo(e){
-    console.log(e.target.id)
   }
 
   render () {
     const user = this.state.user
+    const change = this.state.change
     return (
       <div>
 
@@ -162,27 +216,42 @@ class UserAccount extends Component{
             <button className="backHome-button" onClick={this.props.logOut.bind(this)}> Back to home </button>
           </div>
           <div className="userContainer">
-            <div className='email-city'>
-              <p>Email: {user.email}</p> <p>{ user.phoneNumber ? "Phone Number:" + user.phoneNumber : null}</p>
-              <p> View <a href={`//www.facebook.com`} target="_blank"><span className="accountURL ">{user.displayName}</span></a> Facebook </p>
-              <p> City: <span className="user-info">{user.city}</span>   </p>
-            </div>
-            <div>
-              <div className="aboutBox">
-                <h1 className="aboutBox-h1">About {user.displayName}</h1>
-                <form className="about-form">
-                  <div>
-                    <li className="about-li" onClick={this.editInfo.bind(this)}>  My name is: <span id="" className="user-info">{user.firstName} {user.lastName}</span>  <img id="" src={require('../images/edit.png')} alt="logo" /></li>
-                    <li className="about-li" id="age" onClick={this.editInfo.bind(this)}> I am  <span id="age" className="user-info">{user.age}</span> years old <img id="age"src={require('../images/edit.png')} alt="logo" /> </li>
-                    <li className="about-li" id="ethnicity" onClick={this.editInfo.bind(this)}> Ethnicity: <span id="ethnicity" className="user-info">{user.ethnicity}</span>  <img id="ethnicity" src={require('../images/edit.png')} alt="logo" /></li>
-                  </div>
-                  <div>
-                    <li className="about-li" id="restaurant" onClick={this.editInfo.bind(this)}> Restaraunt: <span id="restaraunt" className="user-info">{user.restaraunt}</span>  <img id="restaraunt" src={require('../images/edit.png')} alt="logo" /></li>
-                    <li className="about-li" id="hobby" onClick={this.editInfo.bind(this)}> Hobby: <span id="hobby" className="user-info">{user.hobby}</span>  <img id="hobby" src={require('../images/edit.png')} alt="logo" /></li>
-                    <li className="about-li" id="movie" onClick={this.editInfo.bind(this)}> Favorite Movie <span id="movie" className="user-info">{user.movie}</span> <img id="movie" src={require('../images/edit.png')} alt="logo" /></li>
-                  </div>
-                </form>
+          <div className="under-header">
+
+          <div>
+              <div className={ change ? "change" : 'hidden'}>
+                <h1> Change your information </h1>
+                <textarea className="change-input" type="text"  rows="4" placeholder=" Change your information" />
+                <div>
+                  <button className="change-submit"> Submit </button>
+                  <button className="change-cancel">  Cancel </button>
+                </div>
+
+               </div>
+            <div className="aboutBox">
+              <div className="about-event">
+                <div className="left-about-box">
+                  <h1 className="aboutBox-h1">About {user.displayName}</h1>
+                  <form className="about-form">
+                    <div className="about-left">
+                      <li className="about-li" id="name" onClick={this.editInfo.bind(this)}>  My name is: <span id="name" className="user-info">{user.firstName} {user.lastName}</span>  <img id="name" src={require('../images/edit.png')} alt="logo" /></li>
+                      {user.age ? this.showAge() : this.enterInfo() }
+                      { user.ethnicity ? this.showEthnicity() : this.enterInfo() }
+                      </div>
+                    <div>
+                      { user.ethnicity ? this.showRestaurant() : this.enterInfo() }
+                      { user.ethnicity ? this.showHobby() : this.enterInfo() }
+                      { user.ethnicity ? this.showMovie() : this.enterInfo() }
+                    </div>
+                  </form>
+                </div>
+                <div className="right-event-box">
+                  <h1> Events near {user.displayName} </h1>
+                </div>
               </div>
+            </div>
+          </div>
+
               <div>
                 <h2> It is good to have an interesting profile. Spice it up!</h2>
 
@@ -233,8 +302,6 @@ class UserAccount extends Component{
                 <h2 className="powers" onClick={this.editExtra.bind(this)}>  If you could have any superpower, what power would it be and why? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
                 { user.powers  ? <p className="more-users-info"> {user.powers} </p> : this.goals() }
                 </div>
-
-
                 </div>
               </div>
             </div>

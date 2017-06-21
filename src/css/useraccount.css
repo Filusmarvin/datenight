@@ -29,7 +29,7 @@ img{
 .userHeader{
   width: 1440px !important;
   height: 200px;
-  background-color: #00ffbf;
+  background-color: #2098d1;
   margin: 0px;
   border: .1px solid #f3f5f9;
   display: flex;
@@ -103,8 +103,13 @@ img{
 width: 800px;
 }
 
+.pic-info{
+  display: flex;
+  justify-content: space-around;
+}
+
 .pic-name{
-  width: 370px;
+  width: 450px;
 }
 
 
@@ -117,6 +122,8 @@ width: 800px;
 }
 .userContainer{
   display: flex;
+  margin-bottom: 0px;
+  padding-bottom:0px;
 }
 .userPhoto{
   width: 150px;
@@ -130,6 +137,13 @@ width: 800px;
   font-size: 20px;
   color: #00ffbf;
 }
+
+.aboutBox{
+  padding-top: 0px;
+  margin-top:0px;
+  background-color: #2098d1;
+}
+
 .aboutBox-h1{
   text-align: center;
 }
@@ -221,6 +235,10 @@ width: 800px;
 
 .email-city{
   width:250px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin-left: 5px;
 }
 
 
@@ -237,4 +255,49 @@ width: 800px;
   width:30px;
   height: 30px;
   transition: 1s;
+}
+
+.under-header{
+  margin-top: 0px;
+}
+
+.email-p{
+  padding:0px;
+  margin:10px;
+}
+
+.about-event{
+  display: flex;
+  width: 1451px;
+  justify-content: space-around;
+}
+
+.right-event-box{
+  text-align: center;
+}
+
+.change{
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  align-items: center;
+  justify-content: space-around;
+  height: 200px;
+}
+.change-input{
+  width: 400px;
+  font-size:30px;
+}
+
+.change-submit{
+  width:200px;
+}
+
+.change-cancel{
+  width:200px;
+}
+
+.hidden{
+  display: none;
 }

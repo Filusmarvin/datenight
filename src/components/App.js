@@ -14,6 +14,8 @@ import Search from './Search.js'
 import axios from 'axios'
 import UserProfile from './UserProfile.js'
 import Common from './Common.js'
+import Header from './Header.js'
+import Change from './Change.js'
 let eventKey = "kzLJCk4t3WPN7Pk5"
 
 var provider = new firebase.auth.FacebookAuthProvider();
@@ -176,19 +178,8 @@ displayName () {
     return (
       <Router>
       <div>
+      { uid ? <Header logOut={this.logOut.bind(this)} /> : false }
 
-      <header className="main-head">
-      <div className="logo" >
-        <Link to="/home" > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
-      </div>
-      <nav className="header-nav">
-        <Link to="/Home" className="hvr-grow header-name"> Browse users </Link>
-        <Link to={`/user/${uid}`} className="hvr-grow header-name"> My Account</Link>
-        <Link to={`/user/${uid}/search`}className="hvr-grow header-name"> Search places </Link>
-         <span onClick={this.logOut.bind(this)}><Link to="/" className="hvr-grow header-name"> Log Out </Link> </span>
-        <img className="menu" src={user.photoURL} alt="" />
-      </nav>
-      </header>
         <Route exact path="/" render={(pickles) =>( loggedin ? ( <Redirect to={`/signup/${uid}`} />) :
       (<Login loginWithFacebook={this.loginWithFacebook.bind(this)}/>))}/>
 
@@ -201,6 +192,8 @@ displayName () {
           <UserAccount user={this.state.user}  logOut={this.logOut.bind(this)}
           userName={this.userName.bind(this)}
           {...pickles} />}/>
+
+        <Route exact path={`/user/:uid`} render={ (pickles) => <Change  {...pickles} /> } /> 
 
         <Route exact path="/signup/:uid" render={ (pickles) =>( this.state.user.genre ?
 

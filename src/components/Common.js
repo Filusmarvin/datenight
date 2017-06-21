@@ -58,18 +58,17 @@ class Common extends Component {
       const hisIds = obj
       // console.log(obj , this.state.herIds )
       for ( var i = 0; i < herIds.length; i++) {
-          for (var  j = 0; j < hisIds.length; j++) {
-      if (herIds[i] === hisIds[j]) {
-        console.log(herIds[i])
-        return axios.get(`https://api.themoviedb.org/3/genre/${herIds[i]}/movies?api_key=${movieKey}&sort_by=created_at.asc`).then(
-          obj => this.setState({ ourMovies : obj.data.results}))
-      } else{
-        return axios.get(`https://api.themoviedb.org/3/genre/${herIds[0]}/movies?api_key=${movieKey}`).then(
-          obj => this.setState({ ourMovies : obj.data.results})
-        )
+        for (var  j = 0; j < hisIds.length; j++) {
+          if (herIds[i] === hisIds[j]) {
+            console.log(herIds[i])
+            return axios.get(`https://api.themoviedb.org/3/genre/${herIds[i]}/movies?api_key=${movieKey}&sort_by=created_at.asc`).then(
+              obj => this.setState({ ourMovies : obj.data.results}))
+          }
+        }
       }
-    }
-  }
+      return axios.get(`https://api.themoviedb.org/3/genre/${herIds[0]}/movies?api_key=${movieKey}`).then(
+        obj => this.setState({ ourMovies : obj.data.results})
+      )
 }
 
 

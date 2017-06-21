@@ -132,13 +132,13 @@ class UserAccount extends Component{
   }
 
   editInfo(e){
-    let user = this.state.user
+    // let user = this.state.user
     let id = e.target.id
     this.enterInfo(id)
   }
 
   enterInfo(id){
-    let name = document.querySelector('.change')
+    // let name = document.querySelector('.change')
 
 
   }

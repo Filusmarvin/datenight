@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 import {Redirect} from 'react-router'
 import '../css/hover.css';
 import '../css/app.css'
@@ -123,6 +123,37 @@ class App extends Component {
   loginWithFacebook() {
     firebase.auth().signInWithRedirect(provider)
   }
+  logInWithGoogle(){
+    firebase.auth().getRedirectResult().then(function(result) {
+  if (result.credential) {
+    // This gives you a Google Access Token.
+    var token = result.credential.accessToken;
+  }
+  var user = result.user;
+});
+
+// Start a sign in process for an unauthenticated user.
+var provider = new firebase.auth.GoogleAuthProvider();
+provider.addScope('profile');
+provider.addScope('email');
+firebase.auth().signInWithRedirect(provider);
+  }
+
+  createUserNameAndPassword(email,password){
+    console.log(email , password)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then(function(user) {
+  		if (user) {
+  			console.log(user.uid)
+  			// console.log(response)
+      }
+    })
+  }
+
+  logInWithUserNameAndPassword(email, password){
+    console.log(email , password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
+  }
 
   userName (info){
     let uid = this.state.user.uid
@@ -173,7 +204,6 @@ displayName () {
   render() {
     let loggedin = app.auth().currentUser ? true : false
     let uid = this.state.user.uid
-    let user = this.state.user
 
     return (
       <Router>
@@ -181,7 +211,10 @@ displayName () {
       { uid ? <Header logOut={this.logOut.bind(this)} /> : false }
 
         <Route exact path="/" render={(pickles) =>( loggedin ? ( <Redirect to={`/signup/${uid}`} />) :
-      (<Login loginWithFacebook={this.loginWithFacebook.bind(this)}/>))}/>
+      (<Login createUserNameAndPassword={this.createUserNameAndPassword.bind(this)}
+      logInWithUserNameAndPassword={this.logInWithUserNameAndPassword.bind(this)}
+      loginWithFacebook={this.loginWithFacebook.bind(this)}
+      logInWithGoogle={this.logInWithGoogle.bind(this)}/>))}/>
 
 
       <Route exact path="/Home" render={(pickles) =>
@@ -193,7 +226,7 @@ displayName () {
           userName={this.userName.bind(this)}
           {...pickles} />}/>
 
-        <Route exact path={`/user/:uid`} render={ (pickles) => <Change  {...pickles} /> } /> 
+        <Route exact path={`/user/:uid`} render={ (pickles) => <Change  {...pickles} /> } />
 
         <Route exact path="/signup/:uid" render={ (pickles) =>( this.state.user.genre ?
 

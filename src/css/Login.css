@@ -1,12 +1,12 @@
 
 
 .container{
-  color:white;
+  color:black;
   font-size: 30px;
   margin-top: 0px;
   margin-bottom: 0px;
   padding: 10px;
-  background-image: url('../images/Paris.jpg');
+  /*background-image: url('../images/Paris.jpg');*/
   background-size: 100% 100%;
 }
 
@@ -35,24 +35,23 @@ left: 400px;
 .log-in-or-signup{
   display: flex;
   height: 600px;
-  /*background: radial-gradient(circle, white, silver, white, silver, white);*/
-  /*border-radius: 10px;*/
+  padding: 0px;
 }
 
 .log:link{
-  color: white ;
+  color: black ;
 }
 .log:active{
-  color: white ;
+  color: black ;
 }
 .log:focus{
-  color: white ;
+  color: black ;
 }
 .log:visited{
-  color: white ;
+  color: black ;
 }
 .log:hover{
-  color: white ;
+  color: black ;
 }
 
 
@@ -69,6 +68,31 @@ left: 400px;
   font-size: 20px;
   border-radius: 5px;
   background: linear-gradient(skyblue, white,skyblue)
+}
+
+.login-email{
+  margin: 0px;
+  padding:0px;
+}
+
+.login-user-input{
+  width:200px;
+}
+.login-password-input{
+  width:200px;
+}
+
+.login-password{
+  margin: 0px;
+  padding:0px;
+}
+
+.div-password{
+  margin-top: 10px;
+}
+
+.returning-user-h3{
+  margin-top:10px;
 }
 
 .intro{
@@ -176,4 +200,11 @@ div{
   width: 450px;
   height: 430px;
   background-color: red;
+}
+
+.login-methods{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }

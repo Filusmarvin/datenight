@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import '../css/Login.css'
 
 class Login extends Component {
@@ -8,6 +8,19 @@ class Login extends Component {
     this.state = {
       user:{},
     }
+  }
+
+  signUp(){
+    let email = this.User.value;
+    let password = this.Password.value;
+    this.props.createUserNameAndPassword(email, password)
+  }
+
+
+  signIn(){
+    let email = this.email.value;
+    let password = this.password.value;
+    this.props.logInWithUserNameAndPassword(email, password)
   }
 
   render() {
@@ -29,16 +42,38 @@ class Login extends Component {
             </div>
             <div className="logInOrSignUp">
               <div className="right-side">
-                <p>Click here to Log in to your account using your Facebook account</p>
-                <div>
-                  <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
-                  <h6 className=" log "> If you want to log in using a different <br />account just sign out of your facebook.
-                  <br /> <br />  <a href="//www.Facebook.com" target="_blank" className="log"> Go to Facebook </a>
-                  </h6>
+                <div className="sign-up">
+                <h3 className="returning-user-h3"> Returning User? Log In here </h3>
+                <div className="sign-in">
+                  <div className="sign-in-username">
+                    <p className="login-email"> Email </p>
+                    <input type="text" className="login-user-input" ref={(input) => { this.email = input}} />
+                  </div>
+                  <div className="sign-in-password">
+                    <p className="login-password"> Password </p>
+                    <input type="password" className="login-user-input" ref={(input) => { this.password = input}} />
+                  </div>
+                  <button onClick={this.signIn.bind(this)}> Enter </button>
+                </div>
+
+                  <h3> No account? Please Sign up!</h3>
+                  <div className="div-user">
+                    <p className="login-email"> Email </p>
+                    <input type="text" className="login-user-input" ref={ (input)=> {this.User = input}} />
+                  </div>
+                    <div className="div-password">
+                      <p className="login-password" > Password </p>
+                      <input type="text" className="login-password-input"  ref={ (input)=> {this.Password = input}} />
+                    </div>
+                    <button onClick={this.signUp.bind(this)}> Enter </button>
                 </div>
               </div>
-
             </div>
+          </div>
+          <div className="login-methods">
+            <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
+            <button className="log-button hvr-grow" > Login with Twitter </button>
+            <button className="log-button hvr-grow" onClick={this.props.logInWithGoogle.bind(this)}> Login with Gmail </button>
           </div>
         </div>
       </container>

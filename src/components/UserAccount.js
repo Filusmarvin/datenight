@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 // import {Link } from 'react-router-dom';
 // import { app } from '../rebase';
 import "../css/useraccount.css";
-import { base } from '../rebase';
+import { base, app} from '../rebase';
+import firebase from 'firebase';
 // import axios from 'axios'
 // const movieKey = "81599007ff214265c13a0888da791d0c"
 // const dinnerKey = "31060f9bfe02586b"
@@ -168,11 +169,42 @@ class UserAccount extends Component{
     })
   }
 
-  getPic(){
+  getDisplayName(){
+    let user = this.state.user
+    if(user.profileName){
 
+    } else {
+      return(
+        <div>
+          <h2> Display name? </h2>
+          <form onSubmit={this.setName.bind(this)}>
+             <input type="<text></text>"  ref={ (input) => {this.display = input }}/>
+             <button> Enter </button>
+          </form>
+        </div>
+      )
+    }
   }
 
-  showPic(){
+  setName(e){
+    e.preventDefault()
+    let name = this.display.value
+    let uid = this.state.user.uid
+    let user = this.state.user
+    base.update(`user/${uid}`,{
+      data:{ displayName: name }
+    })
+    base.fetch(`user/${uid}`,{
+      context:this,
+      asArray:false,
+      then(data){
+        console.log(data)
+        this.setState({ user: {...user, displayName: data.displayName}})
+      }
+    })
+  }
+
+  showDisplayName(){
     const user = this.state.user
     return (
     <div className="pic-name">
@@ -191,6 +223,61 @@ class UserAccount extends Component{
     )
   }
 
+  // something(){
+  //     console.log('event',event)
+  //     console.log('this',this.fileButton.files[0])
+  //     var file = this.fileButton.files[0]
+  //     //Create a storage ref
+  //     var storageRef = app.storage().ref(this.state.user.uid+'/photos/'+file.name);
+  //     //Upload file
+  //     var uploadTask = storageRef.put(file);
+  //
+  //
+  //     // Listen for state changes, errors, and completion of the upload.
+  //     uploadTask.on( app.storage.STATE_CHANGED, // or 'state_changed'
+  //       (snapshot) => {
+  //         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+  //         var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+  //         this.setState({
+  //           addPhotoButtonText: 'uploading...'+progress+'%'
+  //         })
+  //         console.log('Upload is ' + progress + '% done');
+  //         switch (snapshot.state) {
+  //           case base.storage.TaskState.PAUSED: // or 'paused'
+  //             console.log('Upload is paused');
+  //             break;
+  //           case base.storage.TaskState.RUNNING: // or 'running'
+  //             console.log('Upload is running');
+  //             break;
+  //         }
+  //       }, (error) => {
+  //
+  //       // A full list of error codes is available at
+  //       // https://firebase.google.com/docs/storage/web/handle-errors
+  //       switch (error.code) {
+  //         case 'storage/unauthorized':
+  //           // User doesn't have permission to access the object
+  //           break;
+  //         case 'storage/canceled':
+  //           // User canceled the upload
+  //           break;
+  //         case 'storage/unknown':
+  //           // Unknown error occurred, inspect error.serverResponse
+  //           break;
+  //       }
+  //     }, () => {
+  //       // Upload completed successfully, now we can get the download URL
+  //       var downloadURL = uploadTask.snapshot.downloadURL;
+  //       console.log('downloadURL:',downloadURL)
+  //       this.setState({
+  //         imgsrc: downloadURL,
+  //         addPhotoButtonText: 'Add Photo'
+  //       })
+  //     });
+  //
+  //
+  //   }
+
   editExtra(e){
     let clicked = e.target.querySelector('form')
     console.log(clicked)
@@ -201,11 +288,10 @@ class UserAccount extends Component{
     const change = this.state.change
     return (
       <div>
-
         <div className="userAccount">
           <header className="userHeader">
             <div>
-              {this.state.user.displayName ? this.showPic(): this.getPic()}
+              {this.state.user.displayName ? this.showDisplayName(): this.getDisplayName()}
             </div>
             <div className="bio">
             { user.bio ? this.showBio() : this.inputBio()}
@@ -234,7 +320,9 @@ class UserAccount extends Component{
                   <h1 className="aboutBox-h1">About {user.displayName}</h1>
                   <form className="about-form">
                     <div className="about-left">
-                      <li className="about-li" id="name" onClick={this.editInfo.bind(this)}>  My name is: <span id="name" className="user-info">{user.firstName} {user.lastName}</span>  <img id="name" src={require('../images/edit.png')} alt="logo" /></li>
+                      <li className="about-li" id="name" onClick={this.editInfo.bind(this)}>  My name is:
+                       <span id="name" className="user-info">{user.firstName} {user.lastName}</span>
+                        <img id="name" src={require('../images/edit.png')} alt="logo" /></li>
                       {user.age ? this.showAge() : this.enterInfo() }
                       { user.ethnicity ? this.showEthnicity() : this.enterInfo() }
                       </div>
@@ -247,6 +335,9 @@ class UserAccount extends Component{
                 </div>
                 <div className="right-event-box">
                   <h1> Events near {user.displayName} </h1>
+                  <div>
+                  <input id="fileButton" name="fileButton" ref={(input) => { this.fileButton = input; }} type="file" accept="image/*" capture="camera" onChange={this.something.bind(this)} />
+                  </div>
                 </div>
               </div>
             </div>

@@ -28,7 +28,6 @@ class App extends Component {
       users:{ genre:false },
       uid:"",
       movies:[],
-      // boo: true,
       location:{}
     }
   }
@@ -123,6 +122,7 @@ class App extends Component {
   loginWithFacebook() {
     firebase.auth().signInWithRedirect(provider)
   }
+
   logInWithGoogle(){
     firebase.auth().getRedirectResult().then(function(result) {
   if (result.credential) {
@@ -130,6 +130,9 @@ class App extends Component {
     var token = result.credential.accessToken;
   }
   var user = result.user;
+
+  console.log(user,token)
+  
 });
 
 // Start a sign in process for an unauthenticated user.

@@ -223,7 +223,7 @@ class UserAccount extends Component{
     )
   }
 
-  // something(){
+  something(){
   //     console.log('event',event)
   //     console.log('this',this.fileButton.files[0])
   //     var file = this.fileButton.files[0]
@@ -276,7 +276,7 @@ class UserAccount extends Component{
   //     });
   //
   //
-  //   }
+    }
 
   editExtra(e){
     let clicked = e.target.querySelector('form')

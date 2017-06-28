@@ -14,16 +14,21 @@ class Header extends Component {
     }
   }
 
+  componentWillReceiveProps(props){
+    let user = this.state.user
+    this.setState({ user:props.user})
+  }
+
   render(){
     let uid = this.state.user.uid
     let user = this.state.user
     return(
       <header className="main-head">
       <div className="logo" >
-        <Link to="/home" > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
+        <Link to={`/user/${uid}/home`} > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
       </div>
       <nav className="header-nav">
-        <Link to="/Home" className="hvr-grow header-name"> Browse users </Link>
+        <Link to={`/user/${uid}/home`} className="hvr-grow header-name"> Browse users </Link>
         <Link to={`/user/${uid}`} className="hvr-grow header-name"> My Account</Link>
         <Link to={`/user/${uid}/search`}className="hvr-grow header-name"> Search places </Link>
          <span onClick={this.props.logOut}><Link to="/" className="hvr-grow header-name"> Log Out </Link> </span>

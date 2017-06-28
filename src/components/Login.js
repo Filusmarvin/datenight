@@ -71,9 +71,11 @@ class Login extends Component {
             </div>
           </div>
           <div className="login-methods">
-            <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
-            <button className="log-button hvr-grow" > Login with Twitter </button>
-            <button className="log-button hvr-grow" onClick={this.props.logInWithGoogle.bind(this)}> Login with Gmail </button>
+            <div className=" facebook">
+              <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
+            </div>
+            <button className="log-button twitter hvr-grow" > Login with Twitter </button>
+            <button className="log-button google hvr-grow" onClick={this.props.logInWithGoogle.bind(this)}> Login with Gmail </button>
           </div>
         </div>
       </container>

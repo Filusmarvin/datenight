@@ -70,6 +70,8 @@ left: 400px;
   background: linear-gradient(skyblue, white,skyblue)
 }
 
+
+
 .login-email{
   margin: 0px;
   padding:0px;
@@ -207,4 +209,14 @@ div{
   justify-content: space-around;
   margin-top: 30px;
   margin-bottom: 30px;
+}
+
+.facebook{
+  border:1px solid black;
+  width: 200px;
+  height: 100px;
+}
+
+.facebook:hover{
+  display: unset;
 }

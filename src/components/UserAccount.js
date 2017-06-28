@@ -286,6 +286,7 @@ class UserAccount extends Component{
   render () {
     const user = this.state.user
     const change = this.state.change
+    console.log(user.email)
     return (
       <div>
         <div className="userAccount">
@@ -335,6 +336,7 @@ class UserAccount extends Component{
                 </div>
                 <div className="right-event-box">
                   <h1> Events near {user.displayName} </h1>
+                  <p> <a href={`mailto:${user.email}`}> {user.email} </a> </p>
                   <div>
                   <input id="fileButton" name="fileButton" ref={(input) => { this.fileButton = input; }} type="file" accept="image/*" capture="camera" onChange={this.something.bind(this)} />
                   </div>

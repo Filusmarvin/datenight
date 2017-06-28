@@ -16,6 +16,7 @@ import UserProfile from './UserProfile.js'
 import Common from './Common.js'
 import Header from './Header.js'
 import Change from './Change.js'
+import Chat from './Chat.js'
 let eventKey = "kzLJCk4t3WPN7Pk5"
 
 var provider = new firebase.auth.FacebookAuthProvider();
@@ -132,7 +133,7 @@ class App extends Component {
   var user = result.user;
 
   console.log(user,token)
-  
+
 });
 
 // Start a sign in process for an unauthenticated user.
@@ -211,7 +212,7 @@ displayName () {
     return (
       <Router>
       <div>
-      { uid ? <Header logOut={this.logOut.bind(this)} /> : false }
+      { uid ? <Header user={this.state.user} logOut={this.logOut.bind(this)} /> : false }
 
         <Route exact path="/" render={(pickles) =>( loggedin ? ( <Redirect to={`/signup/${uid}`} />) :
       (<Login createUserNameAndPassword={this.createUserNameAndPassword.bind(this)}
@@ -220,8 +221,9 @@ displayName () {
       logInWithGoogle={this.logInWithGoogle.bind(this)}/>))}/>
 
 
-      <Route exact path="/Home" render={(pickles) =>
-        <Home logOut={this.logOut.bind(this)} users={this.state.users}{...pickles} />} />
+      <Route exact path={`/user/:uid/home`} render={(pickles) =>
+        <Home logOut={this.logOut.bind(this)} users={this.state.users}
+        user={this.state.user} {...pickles} />} />
 
 
         <Route exact path={`/user/:uid`} render={(pickles) =>
@@ -243,12 +245,15 @@ displayName () {
           <Search user={this.state.user} logOut={this.logOut.bind(this)}
            {...pickles} />} />
 
-        <Route exact path="/user/:uid/profile/:index" render={(pickles) =>
+        <Route exact path="/user/:uid/profile/:usersuid" render={(pickles) =>
         <UserProfile user={this.state.user} users={this.state.users}{...pickles}/> } />
 
 
-        <Route exact path="/user/:uid/profile/:index/common" render={(pickles) =>
+        <Route exact path="/user/:uid/profile/:usersuid/common" render={(pickles) =>
         <Common user={this.state.user} users={this.state.users}{...pickles}/> } />
+
+        <Route exact path="/user/:uid/profile/:usersuid/message" render={(pickles) =>
+        <Chat user={this.state.user} users={this.state.users}{...pickles}/> } />
 
       </div>
       </Router>

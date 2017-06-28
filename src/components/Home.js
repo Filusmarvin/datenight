@@ -9,19 +9,15 @@ class Home extends Component {
       super()
       this.state = {
         users:[],
-        user:[]
+        user:{}
       }
     }
-    componentDidMount(){
-      // set state to users
-      base.fetch(`user` ,{
-        context: this,
-        asArray: true,
-        then(data){
-          this.setState({ users: data})
-        }
-      })
-      base.fetch(`user/${this.state.user.uid}` ,{
+
+    componentWillReceiveProps(props){
+      let user = this.props.user
+      console.log(user.uid)
+      // this is to set the user
+      base.fetch(`user/${user.uid}` ,{
         context: this,
         asArray: false,
         then(data){
@@ -30,14 +26,28 @@ class Home extends Component {
       })
     }
 
+    componentDidMount(){
+      console.log(this.props.user)
+      // set state to users
+      base.fetch(`user` ,{
+        context: this,
+        asArray: true,
+        then(data){
+          this.setState({ users: data})
+        }
+      });
+    }
+
   showUser(){
     let users = this.state.users
-    let uid = this.state.users
+    let user = this.state.user
+    let uid = this.state.user
+    console.log(uid, user);
     return users.map((users,index) => {
       return(
         <div className="user-pic" key={index}>
           <div className="pic">
-            <Link to={`/user/${uid[index].uid}/profile/${index}`}>
+            <Link to={`/user/${user.uid}/profile/${uid[index].uid}`}>
               <img className="profile-pic"src={users.photoURL} alt="Profile" />
             </Link>
           </div >

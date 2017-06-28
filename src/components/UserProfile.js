@@ -37,7 +37,7 @@ class UserProfile extends Component {
             <p> {user.displayName} </p>
             <p> {user.age} years old</p>
             <button className="like-button profile-button"> Like </button>
-            <button className="message-button profile-button"> Message </button>
+            <Link to={`/user/${uid}/profile/${index}/message`} className="message-button profile-button" > Message </Link>
             <Link to={`/user/${uid}/profile/${index}/common`}  className="similarity-button profile-button"> View similarities</Link>
           </div>
         </header>

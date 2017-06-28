@@ -1,0 +1,14 @@
+.Message-box{
+  display: flex;
+  border: thin solid red;
+}
+
+.Message{
+  margin: 10px;
+  padding:10px;
+  border: thin solid green;
+}
+
+.Message-author{
+  font-size: 20px;
+}

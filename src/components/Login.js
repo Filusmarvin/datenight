@@ -28,7 +28,7 @@ class Login extends Component {
       <container>
         <div className="container">
           <header className="header">
-          <h1>Dinner and A Date </h1>
+          <h1 className="app-name"> Some One To Love </h1>
           </header>
           <div className="log-in-or-signup">
             <div className="intro">
@@ -71,7 +71,7 @@ class Login extends Component {
             </div>
           </div>
           <div className="login-methods">
-            <div className=" facebook">
+            <div className="">
               <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
             </div>
             <button className="log-button twitter hvr-grow" > Login with Twitter </button>

@@ -1,14 +1,32 @@
 .Message-box{
   display: flex;
   border: thin solid red;
+  height: 400px;
 }
 
 .Message{
   margin: 10px;
   padding:10px;
   border: thin solid green;
+  width: 500px;
+  height: 100px;
 }
 
 .Message-author{
   font-size: 20px;
+}
+
+.message-pane{
+  border: 1px solid black;
+}
+
+.message-name{
+  font-size: 30px;
+  padding: 0px;
+  margin:0px;
+  padding-left: 20px;
+}
+
+.message-button{
+  width:100px
 }

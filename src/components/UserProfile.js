@@ -4,31 +4,60 @@ import {base } from '../rebase';
 import '../css/userprofile.css'
 
 
+
 class UserProfile extends Component {
     constructor(){
       super()
       this.state = {
-        user: {}
+        user: {},
+        users:[],
+        chatUser:{}
       }
     }
 
+
+    // componentWillReceiveProps(props){
+    //   let user = this.state.user
+    //   let users = this.state.users
+    //   let index = this.props.match.params.index
+    //   // this is to set the user
+    //   base.fetch(`user/${user.uid}` ,{
+    //     context: this,
+    //     asArray: false,
+    //     then(data){
+    //       this.setState({ user: data}, console.log(user))
+    //     }
+    //   })
+    //
+    //   this.setState({chatUser: users[index] })
+    // }
+
     componentDidMount(){
-      // this.setState({ user: this.props.user})
-      let uid = this.props.match.params.uid
-      base.fetch( `user/${uid}`,{
-        context: this,
+      let user = this.state.user
+      let users = this.state.users
+      let params = this.props.match.params.usersuid
+      console.log(params)
+      // set state to users
+      base.fetch(`user/${params}`,{
+        context:this,
         asArray: false,
         then(data){
-          this.setState({ user: data })
+          this.setState({ user: data})
         }
       })
-      console.log(this.state.user)
+    }
+
+
+    user(){
+      let index = this.props.match.params.index
+      console.log(this.state.users, this.state.chatUser)
     }
 
   render(){
-    const user = this.state.user
-    const uid = this.props.match.params.uid
-    const index = this.props.match.params.index
+    let user = this.state.user
+    let uid = this.props.match.params.uid
+    let params = this.props.match.params.usersuid
+    let index = this.props.match.params.index
     return(
       <div className="profile-container">
         <header className="profile-header">
@@ -37,8 +66,8 @@ class UserProfile extends Component {
             <p> {user.displayName} </p>
             <p> {user.age} years old</p>
             <button className="like-button profile-button"> Like </button>
-            <Link to={`/user/${uid}/profile/${index}/message`} className="message-button profile-button" > Message </Link>
-            <Link to={`/user/${uid}/profile/${index}/common`}  className="similarity-button profile-button"> View similarities</Link>
+            <Link to={`/user/${uid}/profile/${params}/message`} className="message-button profile-button" > Message </Link>
+            <Link to={`/user/${uid}/profile/${params}/common`}  className="similarity-button profile-button"> View similarities</Link>
           </div>
         </header>
         <div className="everything-else">
@@ -65,7 +94,7 @@ class UserProfile extends Component {
           </div>
         </div>
         <div>
-
+          <button onClick={this.user.bind(this)}> Somtyfsfjvo iklmvs</button>
         </div>
       </div>
     )

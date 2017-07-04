@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import {Redirect} from 'react-router'
 import '../css/hover.css';
-import '../css/app.css'
+import '../css/app.css';
+import Users from './Users'
 import Login from './Login.js'
 // import Footer from  './Footer.js'
 import Signup from './SignUp.js'
@@ -231,7 +232,7 @@ displayName () {
           userName={this.userName.bind(this)}
           {...pickles} />}/>
 
-        <Route exact path={`/user/:uid`} render={ (pickles) => <Change  {...pickles} /> } />
+        
 
         <Route exact path="/signup/:uid" render={ (pickles) =>( this.state.user.genre ?
 
@@ -245,7 +246,7 @@ displayName () {
           <Search user={this.state.user} logOut={this.logOut.bind(this)}
            {...pickles} />} />
 
-        <Route exact path="/user/:uid/profile/:usersuid" render={(pickles) =>
+        <Route exact path="/user/:uid/profile/:usersuid/id/:index" render={(pickles) =>
         <UserProfile user={this.state.user} users={this.state.users}{...pickles}/> } />
 
 

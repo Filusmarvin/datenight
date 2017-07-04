@@ -14,9 +14,7 @@
   border: 1px solid black;
   flex-direction: column;
   width: 250px;
-  /*height: 300px;*/
   margin:30px;
-  border-radius: 5px;
 }
 
 .mini-bio{
@@ -28,12 +26,10 @@
 .pic{
   display: flex;
   width: 250px;
-  border-radius: 5px;
 }
 .profile-pic{
   width: 250px;
   height:250px;
-  border-radius: 5px;
 }
 
 .age-name{
@@ -53,12 +49,10 @@
 }
 
 .search-users{
-  /*position: relative;*/
   text-align: center;
   left:500px;
 }
 
 .user-input{
   width: 300px;
-  border-radius: 4px;
 }

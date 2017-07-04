@@ -68,8 +68,6 @@ img{
   position: relative;
   text-align: center;
   right:200px;
-  /*display: flex;
-  flex-wrap: wrap;*/
   width:80%;
 }
 
@@ -304,4 +302,27 @@ width: 800px;
 
 .uploader{
   width: 300px;
+}
+
+.about-me{
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+
+}
+
+.about-me p {
+  padding-left: 33%;
+  font-size: 20px;
+}
+
+.about-me h2{
+  padding-left: 25%;
+  font-size: 30px;
+}
+
+.about-me div h2{
+  font-size: 20px;
+  padding-left: 33%;
 }

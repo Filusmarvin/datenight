@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import "../css/useraccount.css";
 import { base, app} from '../rebase';
 import firebase from 'firebase';
+import Users from './Users.js'
 // import axios from 'axios'
 // const movieKey = "81599007ff214265c13a0888da791d0c"
 // const dinnerKey = "31060f9bfe02586b"
@@ -16,6 +17,7 @@ class UserAccount extends Component{
     super();
     this.state = {
       user:{ restaraunt:"" },
+      users:[],
       movies: [],
       change: false
     }
@@ -36,7 +38,14 @@ class UserAccount extends Component{
         }
       })
     }
-
+    // set state to users
+    base.fetch(`user` ,{
+      context: this,
+      asArray: true,
+      then(data){
+        this.setState({ users: data})
+      }
+    });
   }
 
   addBio(e){
@@ -204,6 +213,7 @@ class UserAccount extends Component{
     })
   }
 
+
   showDisplayName(){
     const user = this.state.user
     return (
@@ -211,7 +221,8 @@ class UserAccount extends Component{
     <h1 className="helloUser"> {user.uid ? user.displayName : 'Hello User'}  </h1>
       <div className="pic-info">
         <div>
-          <img src={user.photoURL ? user.photoURL : null} className="userPhoto" alt="Profile"/>
+          <img src={user.photoURL ? user.photoURL : null}
+          className="userPhoto" alt="Profile"/>
         </div>
         <div className='email-city'>
           <p className="email-p one-p">Email: {user.email}</p>
@@ -222,61 +233,6 @@ class UserAccount extends Component{
     </div>
     )
   }
-
-  something(){
-  //     console.log('event',event)
-  //     console.log('this',this.fileButton.files[0])
-  //     var file = this.fileButton.files[0]
-  //     //Create a storage ref
-  //     var storageRef = app.storage().ref(this.state.user.uid+'/photos/'+file.name);
-  //     //Upload file
-  //     var uploadTask = storageRef.put(file);
-  //
-  //
-  //     // Listen for state changes, errors, and completion of the upload.
-  //     uploadTask.on( app.storage.STATE_CHANGED, // or 'state_changed'
-  //       (snapshot) => {
-  //         // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
-  //         var progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-  //         this.setState({
-  //           addPhotoButtonText: 'uploading...'+progress+'%'
-  //         })
-  //         console.log('Upload is ' + progress + '% done');
-  //         switch (snapshot.state) {
-  //           case base.storage.TaskState.PAUSED: // or 'paused'
-  //             console.log('Upload is paused');
-  //             break;
-  //           case base.storage.TaskState.RUNNING: // or 'running'
-  //             console.log('Upload is running');
-  //             break;
-  //         }
-  //       }, (error) => {
-  //
-  //       // A full list of error codes is available at
-  //       // https://firebase.google.com/docs/storage/web/handle-errors
-  //       switch (error.code) {
-  //         case 'storage/unauthorized':
-  //           // User doesn't have permission to access the object
-  //           break;
-  //         case 'storage/canceled':
-  //           // User canceled the upload
-  //           break;
-  //         case 'storage/unknown':
-  //           // Unknown error occurred, inspect error.serverResponse
-  //           break;
-  //       }
-  //     }, () => {
-  //       // Upload completed successfully, now we can get the download URL
-  //       var downloadURL = uploadTask.snapshot.downloadURL;
-  //       console.log('downloadURL:',downloadURL)
-  //       this.setState({
-  //         imgsrc: downloadURL,
-  //         addPhotoButtonText: 'Add Photo'
-  //       })
-  //     });
-  //
-  //
-    }
 
   editExtra(e){
     let clicked = e.target.querySelector('form')
@@ -308,7 +264,7 @@ class UserAccount extends Component{
           <div>
               <div className={ change ? "change" : 'hidden'}>
                 <h1> Change your information </h1>
-                <textarea className="change-input" type="text"  rows="4" placeholder=" Change your information" />
+                <textarea className="change-input" type="text"  rows="4" placeholder=" information" />
                 <div>
                   <button className="change-submit"> Submit </button>
                   <button className="change-cancel">  Cancel </button>
@@ -334,21 +290,12 @@ class UserAccount extends Component{
                     </div>
                   </form>
                 </div>
-                <div className="right-event-box">
-                  <h1> Events near {user.displayName} </h1>
-                  <p> <a href={`mailto:${user.email}`}> {user.email} </a> </p>
-                  <div>
-                  <input id="fileButton" name="fileButton" ref={(input) => { this.fileButton = input; }} type="file" accept="image/*" capture="camera" onChange={this.something.bind(this)} />
-                  </div>
                 </div>
               </div>
             </div>
-          </div>
 
-              <div>
+              <div className="about-me">
                 <h2> It is good to have an interesting profile. Spice it up!</h2>
-
-                <div className="interesting">
 
                 <div>
                   <h2 className="goals" onClick={this.editExtra.bind(this)}>What am I doing with my life? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
@@ -356,47 +303,47 @@ class UserAccount extends Component{
                 </div>
 
                 <div>
-
-                <h2 className="attraction" onClick={this.editExtra.bind(this)}> What is your biggest turn off? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.attraction  ? <p className="more-users-info"> {user.attraction} </p> : this.goals() }
+                  <h2 className="attraction" onClick={this.editExtra.bind(this)}> What is your biggest turn off? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.attraction  ? <p className="more-users-info"> {user.attraction} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="describe" onClick={this.editExtra.bind(this)}> What are the 5 best words to describe myself? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.describe  ? <p className="more-users-info"> {user.describe} </p> : this.goals() }
+                  <h2 className="describe" onClick={this.editExtra.bind(this)}> What are the 5 best words to describe myself? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.describe  ? <p className="more-users-info"> {user.describe} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="peeves" onClick={this.editExtra.bind(this)}> What are your biggest pet peeves?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.peeves  ? <p className="more-users-info"> {user.peeves} </p> : this.goals() }
+                  <h2 className="peeves" onClick={this.editExtra.bind(this)}> What are your biggest pet peeves?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.peeves  ? <p className="more-users-info"> {user.peeves} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="flaws" onClick={this.editExtra.bind(this)}> What are my 3 biggest flaws? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.flaws  ? <p className="more-users-info"> {user.flaws} </p> : this.goals() }
+                  <h2 className="flaws" onClick={this.editExtra.bind(this)}> What are my 3 biggest flaws? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.flaws  ? <p className="more-users-info"> {user.flaws} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="addiction" onClick={this.editExtra.bind(this)}> What are 6 things that you can not live with out? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.addiction  ? <p className="more-users-info"> {user.addiction} </p> : this.goals() }
+                  <h2 className="addiction" onClick={this.editExtra.bind(this)}> What are 6 things that you can not live with out? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.addiction  ? <p className="more-users-info"> {user.addiction} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="fun"  onClick={this.editExtra.bind(this)}> What are something that you do for fun? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.fun  ? <p className="more-users-info"> {user.fun} </p> : this.goals() }
+                  <h2 className="fun"  onClick={this.editExtra.bind(this)}> What are something that you do for fun? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.fun  ? <p className="more-users-info"> {user.fun} </p> : this.goals() }
                 </div>
+
                 <div>
-
-                <h2 className="bucketList" onClick={this.editExtra.bind(this)}> What are 5 things you want to do before you die?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.bucketList  ? <p className="more-users-info"> {user.bucketList} </p> : this.goals() }
+                  <h2 className="bucketList" onClick={this.editExtra.bind(this)}> What are 5 things you want to do before you die?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.bucketList  ? <p className="more-users-info"> {user.bucketList} </p> : this.goals() }
                 </div>
+
                 <div>
+                  <h2 className="powers" onClick={this.editExtra.bind(this)}>  If you could have any superpower, what power would it be and why? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                  { user.powers  ? <p className="more-users-info"> {user.powers} </p> : this.goals() }
+                </div>
 
-                <h2 className="powers" onClick={this.editExtra.bind(this)}>  If you could have any superpower, what power would it be and why? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.powers  ? <p className="more-users-info"> {user.powers} </p> : this.goals() }
-                </div>
-                </div>
               </div>
+              < Users />
             </div>
           </div>
         </div>

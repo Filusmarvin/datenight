@@ -8,18 +8,22 @@
   padding: 10px;
   /*background-image: url('../images/Paris.jpg');*/
   background-size: 100% 100%;
+  background-color: #2098d1;
+}
+.app-name{
+  margin:20px;
 }
 
 
 .header{
 font-size: 30px;
-/*color: white;*/
 text-align: center;
-margin:0px;
+margin:0px !important;
 padding: 0px;
-/*position: fixed;*/
 top: -25px;
-left: 400px;
+/*left: 400px;*/
+background-color: #2098d1;
+color: pink;
 }
 
 .log-button{
@@ -102,18 +106,20 @@ left: 400px;
   border-radius: 10px;
   flex-direction: column;
   justify-content: space-around;
-  padding-top: 100px;
-  background-size: 641px 600px;
-  background-repeat: no-repeat;
   width: 50%;
   text-align: center;
   font-size: 20px;
   margin:0px;
   padding:0px;
 }
+.sign-up{
+  border-radius: 10px;
+  padding-top: 25px;
+  padding-bottom: 25PX;
+  font-size: 20px;
+}
 .intro-words{
   display: flex;
-  /*color: black;*/
   font-size: 30px;
 }
 .intro-ul{

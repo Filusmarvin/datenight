@@ -1,0 +1,13 @@
+.image-comp{
+  position: absolute;
+  width:100%;
+  height: 100%;
+  border: thin solid green;
+  background-color: grey;
+  opacity: .5;
+}
+
+
+.Card{
+  border: thin solid grey;
+}

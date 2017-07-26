@@ -27,23 +27,28 @@ img{
   margin-left: 20px;
 }
 .userHeader{
-  width: 1440px !important;
+  width: 1450px !important;
   height: 200px;
   background-color: #2098d1;
   margin: 0px;
-  border: .1px solid #f3f5f9;
+  border: 1px solid #f3f5f9;
   display: flex;
-  padding-left: 9px;
 }
 
 .bio{
-  position: relative;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
-  top: 0px;
-  left: 200px;
   color: white;
-  width:850px;
+  width:100%;
+  text-align: center;
+}
+
+.bio-container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .edit-logo{
@@ -64,11 +69,27 @@ img{
   text-align: center;
 }
 
+.bio-box-container{
+  display: flex;
+  width: 100%;
+  justify-content: ;
+}
+
 .bio-box{
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: black;
   text-align: center;
-  right:200px;
-  width:80%;
+  border: 1px solid black;
+  right: 200px;
+  width: 140%;
+}
+
+.left-bio-box{
+  border: 1px solid black;
+  padding-right: 0px;
+  margin-left: 0px;
 }
 
 .bio-input{
@@ -82,16 +103,10 @@ img{
   padding-right: 0.4em;
 }
 .bio-button{
-  position: relative;
-  top: 15px;
-  right: 405px;
-  width:200px;
+  width: 100px;
 }
 .bio-cancel-button{
-  position: relative;
-  top:15px;
-  right:405px;
-  width:200px;
+  width: 100px;
 }
 .bio-h1{
   color:white;
@@ -99,6 +114,7 @@ img{
 
 .bio-info{
 width: 800px;
+text-align: center;
 }
 
 .pic-info{
@@ -148,6 +164,7 @@ width: 800px;
 
 .about-form{
   display: flex;
+  width: 1400px;
 }
 .about-li{
   margin:30px;
@@ -180,11 +197,21 @@ width: 800px;
   height: 100px;
 }
 
+.goal-form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .save-extra-button{
-  position: relative;
-  width: 150px;
-  top: 15px;
-  right: 300px;
+  width: 100px;
+}
+
+.each-about-box{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .movie-category{
@@ -304,25 +331,40 @@ width: 800px;
   width: 300px;
 }
 
+.about-me-box{
+  display: flex;
+  justify-content: space-around;
+}
+
 .about-me{
-  position: relative;
+  width: 700px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
-
+  justify-content: center;
+  text-align: center;
 }
 
 .about-me p {
-  padding-left: 33%;
+  /*padding-left: 33%;*/
   font-size: 20px;
 }
 
 .about-me h2{
-  padding-left: 25%;
+  /*padding-left: 25%;*/
   font-size: 30px;
 }
 
 .about-me div h2{
   font-size: 20px;
-  padding-left: 33%;
+  /*padding-left: 33%;*/
+}
+
+.about-left{
+  width:1500px;
+  text-align: center;
+}
+
+.about-right{
+  width:1500px;
+  text-align: center;
 }

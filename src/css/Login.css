@@ -33,6 +33,7 @@ color: pink;
   border-radius: 5px;
   right: 10px;
   font-size: 25px;
+  width: 200px;
 }
 
 
@@ -175,33 +176,8 @@ div{
   width:25%;
 }
 
-.box-1{
-  background-image: url("../images/pizzacouple.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: -80px 0px;
-
-}
-
-.box-2{
-  background-image: url("../images/Coffee.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-
-}
-
-.box-3{
-  background-image: url("../images/redhead.jpg");
-  background-repeat: no-repeat;
-  background-position: -120px 0px;
-  background-size: cover;
-
-}
-
-.box-4{
-  background-image: url("../images/feedme.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
+.sign-up button {
+  width: 100px;
 }
 
 .fb-like{

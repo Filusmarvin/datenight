@@ -232,7 +232,7 @@ displayName () {
           userName={this.userName.bind(this)}
           {...pickles} />}/>
 
-        
+
 
         <Route exact path="/signup/:uid" render={ (pickles) =>( this.state.user.genre ?
 

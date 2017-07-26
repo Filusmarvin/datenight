@@ -3,42 +3,33 @@ import { Link } from 'react-router-dom';
 import {base , app } from '../rebase';
 import '../css/Chat.css'
 
-const Message = ({author, text , id , channel_id }) => (
-  <div className="Message">
-    <div className="Message-author"> {author}</div>
-    <div className="Message-text"> {text}</div>
-  </div>
-)
 
-const List = ({messages}) => (
-  <div className="MessagePane-List">
-    {messages.map(({author, text}, index) => <Message author={author} text={text} key={index} /> )}
-  </div>
-)
-const channels = [
-  {id: 1, name: "general channel"},
-  {id: 2, name: "birthday channel"},
-  {id: 3, name: "water channel"},
-  {id: 4, name: "ironyard channel"}
-]
+const Message = ({author, text , id , channel_id, params , user ,useruid }) => {
 
-const selectedId = 2;
-
-const Channel = ({name , isSelected }) => {
-  const className = isSelected ? "ChannelList-item ChannelList-item-selected" : "ChannelList "
-  return(
-    <div className="channelList">{name}</div>
-  )
-};
-
-const ChannelList = ({ name }) => (
-  <div className="ChannelList-item">
-    {
-      channels.map(({name , id }) => {
-         return( <Channel key={id} name={name} />)
-      })
+  const fun = () => {
+    console.log(user, useruid)
+    if ( user === params){
+      return "Message-right"
+    } else {
+      return "Message-left"
     }
-   </div>
+  }
+
+  return(
+
+    <div className={user === useruid ? "Message-right" : "Message-left"}>
+      <p> {fun()}</p>
+      <div className= "Message-author"> {author}</div>
+      <div className="Message-text"> {text}</div>
+    </div>
+  )
+
+}
+
+const List = ({messages, author, params, useruid, user }) => (
+  <div className="MessagePane-List">
+    {messages.map(({author, text}, index) => <Message author={author} user={user} text={text} params={params} useruid={useruid} key={index} /> )}
+  </div>
 )
 
 
@@ -54,9 +45,6 @@ class Chat extends Component {
     }
   }
 
-  componentWillReceiveProps(props){
-
-  }
 
   componentDidMount(){
     let userprop = this.props.user
@@ -64,7 +52,7 @@ class Chat extends Component {
     let useruid = this.props.match.params.uid
     let params = this.props.match.params.usersuid
     console.log(useruid , params);
-    base.syncState(`user/${useruid}/Chat/+${params}`, {
+    base.syncState(`user/${useruid}/Chat/${params}/message`, {
       context: this,
       state: 'messages',
       asArray: true
@@ -105,13 +93,13 @@ class Chat extends Component {
     };
 
     const messages = [...this.state.messages, new_message];
-    this.setState({ messages:messages});
-    base.update(`user/${useruid}/Chat/+${params}`,{
-      data:{ chat: messages }
-    })
-    base.update(`user/${params}/Chat/+${useruid}`,{
-      data:{ chat: messages }
-    })
+    if(this.state.message !== ""){
+      this.setState({ messages:messages});
+
+      base.update(`user/${params}/Chat/${useruid}`,{
+        data:{ message : messages }
+      })
+    }
   }
 
   Name(e){
@@ -122,6 +110,10 @@ class Chat extends Component {
   }
 
   render(){
+    let useruid = this.props.match.params.uid
+    let params = this.props.match.params.usersuid
+    let user = this.state.user.uid
+    console.log(this.state.messages)
     return(
       <div>
         <div className="channelList">
@@ -129,7 +121,7 @@ class Chat extends Component {
         </div>
         <div >
           <div className="Message-box">
-            <List messages={this.state.messages} />
+            <List params={params} useruid={useruid}  user={user} messages={this.state.messages} />
           </div>
           <div>
             <div className="message-pane">

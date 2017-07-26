@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import  { Link } from 'react-router-dom'
 import {base } from '../rebase';
 import '../css/userprofile.css'
+import DM from './DM.js'
 
 
 
@@ -11,26 +12,10 @@ class UserProfile extends Component {
       this.state = {
         user: {},
         users:[],
-        chatUser:{}
+        chatUser:{},
+        dm: true
       }
     }
-
-
-    // componentWillReceiveProps(props){
-    //   let user = this.state.user
-    //   let users = this.state.users
-    //   let index = this.props.match.params.index
-    //   // this is to set the user
-    //   base.fetch(`user/${user.uid}` ,{
-    //     context: this,
-    //     asArray: false,
-    //     then(data){
-    //       this.setState({ user: data}, console.log(user))
-    //     }
-    //   })
-    //
-    //   this.setState({chatUser: users[index] })
-    // }
 
     componentDidMount(){
       let user = this.state.user
@@ -50,10 +35,20 @@ class UserProfile extends Component {
 
     user(){
       let index = this.props.match.params.index
-      console.log(this.state.users, this.state.chatUser)
+      console.log(this.state.user, this.state.chatUser)
+    }
+
+    dm(){
+      let dm = this.state.dm
+      if(dm === true){
+        this.setState({ dm : false })
+      } else {
+        this.setState({ dm : true })
+      }
     }
 
   render(){
+    let dm = this.state.dm
     let user = this.state.user
     let uid = this.props.match.params.uid
     let params = this.props.match.params.usersuid
@@ -65,13 +60,23 @@ class UserProfile extends Component {
           <div className="profile-bio">
             <p> {user.displayName} </p>
             <p> {user.age} years old</p>
-            <button className="like-button profile-button"> Like </button>
-            <Link to={`/user/${uid}/profile/${params}/message`} className="message-button profile-button" > Message </Link>
-            <Link to={`/user/${uid}/profile/${params}/common`}  className="similarity-button profile-button"> View similarities</Link>
+            <p> Lives in {user.city}</p>
+          </div>
+          <div className="few-things">
+            <h2> A few things about me is.....</h2>
+            <p> My name is {user.firstName}</p>
+            <p> I am from {user.city}</p>
+            <p> My favorite Movie is {user.movie}</p>
+            <p> I love to eat at {user.restaraunt}</p>
+          </div>
+          <div className="button-box">
+            <button className="user-button like-button"> Like </button>
+            <Link to={`/user/${uid}/profile/${params}/message`} className="user-button message-button"> Message </Link>
+            <Link to={`/user/${uid}/profile/${params}/common`}  className="user-button similarity-button"> View similarities</Link>
           </div>
         </header>
         <div className="everything-else">
-          <div className="left-div">
+          <div className="center-div">
             <h2> My Self Summary! </h2>
             <p className="summary"> {user.bio}</p>
             <h2> My Addictions </h2>
@@ -89,12 +94,12 @@ class UserProfile extends Component {
             <h2>If I could have any super power it would be </h2>
             <p> {user.powers}</p>
           </div>
-          <div className="right-div">
-
-          </div>
         </div>
         <div>
           <button onClick={this.user.bind(this)}> Somtyfsfjvo iklmvs</button>
+        </div>
+        <div className= "DM-comp" >
+          <DM className={dm ? null : 'bar'} params={params} dm={this.dm.bind(this)} user={user} uid={uid} />
         </div>
       </div>
     )

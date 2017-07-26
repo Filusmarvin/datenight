@@ -1,0 +1,63 @@
+.DM-container{
+  display: flex;
+  flex: 1;
+  overflow: scroll;
+  flex-direction: column;
+  height: 100%;
+
+}
+
+.DM-container header{
+  background: #104da1;
+  font-size: 20px;
+  color: white;
+  height: 40px;
+  width: 300px;
+  text-align: center;
+  display: flex;
+}
+
+.bar header{
+  background: #104da1;
+  font-size: 20px;
+  color: white;
+  height: 40px;
+  width: 300px;
+  text-align: center;
+  display: flex;
+}
+
+.Messages{
+  height: 80%;
+  overflow: scroll;
+}
+
+.each-message{
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  padding: 0px;
+  margin: 3px;
+}
+
+.each-message p{
+  padding: 0px;
+  margin: 3px;
+}
+
+.form-box{
+  width: 100%;
+}
+
+.form-box textarea, button{
+  width:99%;
+  text-align: center;
+}
+
+.hidden-message{
+  display:none;
+}
+
+.bar{
+  transform: translateY(360px);
+}

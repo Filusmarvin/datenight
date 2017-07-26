@@ -16,7 +16,6 @@ class Login extends Component {
     this.props.createUserNameAndPassword(email, password)
   }
 
-
   signIn(){
     let email = this.email.value;
     let password = this.password.value;

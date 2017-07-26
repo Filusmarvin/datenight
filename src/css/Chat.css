@@ -1,18 +1,44 @@
 .Message-box{
   display: flex;
+  flex: 1;
   border: thin solid red;
   height: 400px;
 }
 
-.Message{
+.Message-left{
+  display: flex;
+  flex-direction: column;
   margin: 10px;
   padding:10px;
-  border: thin solid green;
+  border: thin solid black;
+  align-self: flex-start;
   width: 500px;
-  height: 100px;
+}
+
+.Message-right{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+  padding:10px;
+  border: thin solid black;
+  align-self: flex-end;
+  width: 500px;
+  height:200px;
+}
+
+.MessagePane-List{
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: scroll;
+  width: 1000px;
 }
 
 .Message-author{
+  font-size: 20px;
+}
+
+.Message-text{
   font-size: 20px;
 }
 

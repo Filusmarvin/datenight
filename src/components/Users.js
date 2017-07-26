@@ -24,20 +24,24 @@ class Users extends Component {
   render(){
     let users = this.state.users
     let image = this.state.image
+    let photo = require("../images/user.png")
     console.log(users)
     return(
-      <div className="">
-        <div>
+      <div className="users-container">
+        <header>
+          <h1 className="card-header"> More Users </h1>
+        </header>
+        <div className="Card-container">
           {users.map((user, index) => {
             console.log(user.photoURL)
             return(
-              <div key={index}>
+              <div className="" key={index}>
                 <div className="Card">
-                <image src={user.photoURL} />
-                <div>
-                  <p>  {user.firstName} {user.lastName} </p>
-                  <p> Age {user.age}</p>
-                </div>
+                  <img className="userPhoto" src={user.photoURL ? user.photoURL : photo} />
+                  <div>
+                    <p>  {user.firstName} {user.lastName} </p>
+                    <p> Age {user.age}</p>
+                  </div>
                 </div>
               </div>
             )

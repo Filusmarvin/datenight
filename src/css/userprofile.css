@@ -98,6 +98,7 @@ body {
   flex:1;
   height: 400px;
   width: 300px;
+  border: solid 1px black;
 }
 
 .bar{

@@ -133,8 +133,8 @@ class UserAccount extends Component{
             <li>Movie Id: {movie.id}</li>
             <li>Released date: {movie.release_date}</li>
             <li> Votes: {movie.vote_average} and Vote count {movie.vote_count}</li>
-            <button onClick={this.addToDo.bind(this, movie)}> Add to must watch </button>
-            <button onClick={this.addToFav.bind(this , movie)}>  Favorites </button>
+            <button className="search-button" onClick={this.addToDo.bind(this, movie)}> Add to must watch </button>
+            <button className="search-button" onClick={this.addToFav.bind(this , movie)}>  Favorites </button>
             <p><Link to={`https://www.themoviedb.org/search?language=en-US&query=${movie.title}`} target="_blank"> View More About Movie</Link></p>
           </div>
         )
@@ -153,8 +153,8 @@ class UserAccount extends Component{
             <li>Movie Id: {genre.id}</li>
             <li>Released date: {genre.release_date}</li>
             <li> Votes: {genre.vote_average} and Vote count {genre.vote_count}</li>
-            <button onClick={this.addToDo.bind(this)}> Add to do </button>
-            <button onClick={this.addToFav.bind(this , genre)}>  Favorites </button>
+            <button className="search-button" onClick={this.addToDo.bind(this)}> Add to do </button>
+            <button className="search-button" onClick={this.addToFav.bind(this , genre)}>  Favorites </button>
             <p><Link to={`https://www.themoviedb.org/search?language=en-US&query=${genre.title}`} target="_blank"> View More About Movie</Link></p>
           </div>
         )
@@ -174,8 +174,8 @@ class UserAccount extends Component{
             <div>
               <p> {place.name}</p>
               <p>{place.formatted_address}</p>
-              <button onClick={this.viewMore.bind(this)}> View More </button>
-              <button> add to favorites </button>
+              <button className="search-button" onClick={this.viewMore.bind(this)}> View More </button>
+              <button className="search-button"> add to favorites </button>
             </div>
           </div>
         )
@@ -227,7 +227,7 @@ class UserAccount extends Component{
             <form onSubmit={this.searchMovie.bind(this)}>
             <li>Look Up Movie by name</li>
               <input type="text" ref={ (input) => {this.input = input} }/>
-              <button> Button </button>
+              <button className="search-button"> Button </button>
               {this.displayMovies()}
             </form>
           </div>
@@ -265,7 +265,7 @@ class UserAccount extends Component{
             <form onSubmit={this.searchPlaces.bind(this)}>
               <li>Look up Places</li>
               <input type="text" ref={ (input) => {this.dinners = input} }/>
-              <button > Search </button>
+              <button className="search-button" > Search </button>
               {this.displayPlace()}
             </form>
           </div>

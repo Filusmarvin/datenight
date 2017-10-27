@@ -65,10 +65,6 @@ class Home extends Component {
       })
   }
 
-  us(){
-    console.log(this.state.user)
-  }
-
 
   render() {
     return (
@@ -76,12 +72,11 @@ class Home extends Component {
         <div className="search-users">
           <p> Search for other users </p>
           <input className="user-input" ref={(input) => {this.input = input } } type="text" />
-          <button > Search </button>
+          <button className="user-search-button"> Search </button>
         </div>
         <div className="all-users">
           { this.showUser()}
         </div>
-        <button onClick={this.us.bind(this)}> USER </button>
       </div>
 
     );

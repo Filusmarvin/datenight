@@ -39,6 +39,7 @@ class Login extends Component {
                 <li>Sign up and check it out!</li>
               </ul>
             </div>
+            <div className="vertical-line"> </div>
             <div className="logInOrSignUp">
               <div className="right-side">
                 <div className="sign-up">
@@ -70,11 +71,12 @@ class Login extends Component {
             </div>
           </div>
           <div className="login-methods">
-            <div className="">
+            <div className="facebook-box fcebook">
               <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
+              <a href="//Facebook.com" className="facebook-hover-box"> Log into Facebook first to log in </a>
             </div>
             <button className="log-button twitter hvr-grow" > Login with Twitter </button>
-            <button className="log-button google hvr-grow" onClick={this.props.logInWithGoogle.bind(this)}> Login with Gmail </button>
+            <button className="log-button google hvr-grow" > Login with Gmail </button>
           </div>
         </div>
       </container>

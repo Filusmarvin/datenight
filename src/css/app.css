@@ -1,5 +1,11 @@
 body{
   width: 1440px;
+  margin:0px;
+  padding:0px;
+}
+
+button{
+  width: 100px;
 }
 
   ul{

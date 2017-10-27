@@ -1,4 +1,8 @@
-.all-users{
+button{
+  width: 100px;
+  }
+
+  .all-users{
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -55,4 +59,8 @@
 
 .user-input{
   width: 300px;
+}
+
+.user-search-button{
+  width: 100px;
 }

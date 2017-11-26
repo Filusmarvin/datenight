@@ -17,6 +17,7 @@ body {
 
 .profile-header{
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 5px;
   background-color: #104da1;
@@ -82,6 +83,7 @@ body {
 }
 
 .user-button{
+  width:200px;
   color: white;
   font-size: 30px;
   border: 1px solid black;
@@ -103,4 +105,26 @@ body {
 
 .bar{
   /*display: none;*/
+}
+.action-buttons{
+  display: flex;
+}
+
+.top-bio-sect{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 2%;
+}
+
+.bottom-bio-sect{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.bottom-bio-sect div{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

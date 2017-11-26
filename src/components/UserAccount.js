@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import $ from "jquery";
 // import {Link } from 'react-router-dom';
 // import { app } from '../rebase';
 import "../css/useraccount.css";
+import UsersColumn from "./UsersColumn.js";
 import { base } from '../rebase';
 
 
@@ -16,6 +18,9 @@ class UserAccount extends Component{
   }
 
   componentDidMount(){
+    $(".jquery-button").on('click', function () {
+      console.log('it worked!!')
+    }) 
 
     if(this.props.user.genre){
       this.setState({
@@ -32,6 +37,8 @@ class UserAccount extends Component{
     }
 
   }
+
+  
 
   addBio(e){
     // e.preventDefault()
@@ -68,8 +75,10 @@ class UserAccount extends Component{
         <form onSubmit={this.addBio.bind(this)}>
           <textarea className="bio-input" type="text"
           ref={(textarea) => {this.text = textarea} }/>
-          <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>
-          <button onClick={this.updateBio.bind(this) } className="bio-cancel-button"> Cancel</button>
+          <div>
+            <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>
+            <button onClick={this.updateBio.bind(this) } className="bio-cancel-button"> Cancel</button>
+          </div>
         </form>
        </div>
      )
@@ -95,8 +104,10 @@ class UserAccount extends Component{
     return(
       <form onSubmit={this.addGoal.bind(this)}>
         <textarea className="extra-text-box" placeholder="Make it interesting :) "type="text" ref={(textarea) => {this.text = textarea} }/>
-        <button  className="save save-extra-button"> Save</button>
-        <button  className=" cancel save-extra-button"> Cancel</button>
+        <div className="save-cancel-div"> 
+          <button  className="save save-extra-button"> Save </button>
+          <button  className=" cancel save-extra-button"> Cancel </button>
+        </div>
       </form>
 
     )
@@ -107,6 +118,7 @@ class UserAccount extends Component{
     let uid = this.props.user.uid
     let text = e.target.querySelector('.extra-text-box').value
     let name = e.target.previousSibling.className
+    console.log(text, name)
     base.update(`user/${uid}`, {
       data:
         {[name]: text}
@@ -116,9 +128,13 @@ class UserAccount extends Component{
     })
   }
 
+  editInfo(e){
+   console.log('hi');
+  }
+
   getPic(){
-    const user = this.state.user
-    let photo = '../images/user.png'
+    const user = this.state.user;
+    let photo = '../images/user.png';
     console.log(photo)
     return(
       <div className="pic-name">
@@ -137,31 +153,33 @@ class UserAccount extends Component{
     </div>)
   }
 
+
   editExtra(e){
-    let clicked = e.target.querySelector('form')
-    console.log(clicked)
+    let uid = this.props.user.uid
+    let name = e.target.parentElement.className
+    console.log(name);
+    base.update(`user/${uid}`,{
+      data: 
+        {[name]: null }
+    })
+    this.setState({ user: {...this.state.user, [name]: null }
+  })
 
   }
-
-  editInfo(e){
-    console.log(e.target.id)
-  }
+    
 
   render () {
     const user = this.state.user
-    const photo = "../images/user.png"
-    console.log(user.displayName)
+    const photo = require("../images/user.png"); 
+    console.log(photo)
+    console.log(user.photoURL)
     return (
       <div>
 
         <div className="userAccount">
-          <header className="userHeader">
+          <header className={user.gender === "Male" ? "userHeader male-color" : "userHeader female-color"}>
             <div className="display-info">
-              { user.photoURL ?
-                <img src={photo} />  :
-                <img src="../images/user.png" />
-              }
-              {this.state.user.displayName ? this.showPic(): this.getPic()}
+              <img className='user-img' src={photo} />
             </div>
             <div className="bio">
             { user.bio ? this.showBio() : this.inputBio()}
@@ -172,12 +190,17 @@ class UserAccount extends Component{
             <button className="backHome-button" onClick={this.props.logOut.bind(this)}> Back to home </button>
           </div>
           <div className="userContainer">
-            <div className='email-city'>
-              <p>Email: {user.email}</p> <p>{ user.phoneNumber ? "Phone Number:" + user.phoneNumber : null}</p>
-              <p> View <a href={`//www.facebook.com`} target="_blank"><span className="accountURL ">{user.displayName}</span></a> Facebook </p>
-              <p> City: <span className="user-info">{user.city}</span>   </p>
+            <div className="left-section">
+              <div className='email-city'>
+                <p> { user.email ? <p> Email: {user.email} </p> : null } { user.phoneNumber ? "Phone Number:" + user.phoneNumber : null}</p>
+                <p> View <a href={`//www.facebook.com`} target="_blank"><span className="accountURL ">{user.displayName}</span></a> Facebook </p>
+                <p> City: <span className="user-info">{user.city}</span>   </p>
+              </div>
+              <div className="more-users">
+                < UsersColumn />
+              </div>
             </div>
-            <div>
+            <div className="big-about">
               <div className="aboutBox">
                 <h1 className="aboutBox-h1">About {user.displayName}</h1>
                 <form className="about-form">
@@ -193,61 +216,65 @@ class UserAccount extends Component{
                   </div>
                 </form>
               </div>
-              <div>
-                <h2> It is good to have an interesting profile. Spice it up!</h2>
+
+              <div className="bottom-interesting-section">
+                <h2 className="spice-it-up"> It is good to have an interesting profile. Spice it up!</h2>
 
                 <div className="interesting">
 
-                <div>
-                  <h2 className="goals" onClick={this.editExtra.bind(this)}>What am I doing with my life? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                  { user.goals  ? <p  className="more-users-info"> {user.goals} </p> : this.goals() }
-                </div>
+                  <div className="interesting-info">
+                    <h2 className="goals" onClick={this.editExtra.bind(this)}>What am I doing with my life? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.goals  ? <p  className="more-users-info"> {user.goals} </p> : this.goals() }
+                  </div>
 
-                <div>
+                  <div className="interesting-info">
 
-                <h2 className="attraction" onClick={this.editExtra.bind(this)}> What is your biggest turn off? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.attraction  ? <p className="more-users-info"> {user.attraction} </p> : this.goals() }
-                </div>
-                <div>
+                  <h2 className="attraction" onClick={this.editExtra.bind(this)}> What is your biggest turn off? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.attraction  ? <p className="more-users-info"> {user.attraction} </p> : this.goals() }
+                    </div>
+                  <div className="interesting-info">
 
-                <h2 className="describe" onClick={this.editExtra.bind(this)}> What are the 5 best words to describe myself? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.describe  ? <p className="more-users-info"> {user.describe} </p> : this.goals() }
-                </div>
-                <div>
+                    <h2 className="describe" onClick={this.editExtra.bind(this)}> What are the 5 best words to describe myself? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.describe  ? <p className="more-users-info"> {user.describe} </p> : this.goals() }
+                  </div>
+                  <div className="interesting-info">
 
-                <h2 className="peeves" onClick={this.editExtra.bind(this)}> What are your biggest pet peeves?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.peeves  ? <p className="more-users-info"> {user.peeves} </p> : this.goals() }
-                </div>
-                <div>
+                    <h2 className="peeves" onClick={this.editExtra.bind(this)}> What are your biggest pet peeves?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.peeves  ? <p className="more-users-info"> {user.peeves} </p> : this.goals() }
+                  </div>
+                  <div className="interesting-info">
 
-                <h2 className="flaws" onClick={this.editExtra.bind(this)}> What are my 3 biggest flaws? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.flaws  ? <p className="more-users-info"> {user.flaws} </p> : this.goals() }
-                </div>
-                <div>
+                    <h2 className="flaws" onClick={this.editExtra.bind(this)}> What are my 3 biggest flaws? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.flaws  ? <p className="more-users-info"> {user.flaws} </p> : this.goals() }
+                  </div>
+                  <div className="interesting-info">
 
-                <h2 className="addiction" onClick={this.editExtra.bind(this)}> What are 6 things that you can not live with out? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.addiction  ? <p className="more-users-info"> {user.addiction} </p> : this.goals() }
-                </div>
-                <div>
+                    <h2 className="addiction" onClick={this.editExtra.bind(this)}> What are 6 things that you can not live with out? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.addiction  ? <p className="more-users-info"> {user.addiction} </p> : this.goals() }
+                  </div>
+                  <div className="interesting-info">
 
-                <h2 className="fun"  onClick={this.editExtra.bind(this)}> What are something that you do for fun? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.fun  ? <p className="more-users-info"> {user.fun} </p> : this.goals() }
-                </div>
-                <div>
+                    <h2 className="fun"  onClick={this.editExtra.bind(this)}> What are something that you do for fun? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.fun  ? <p className="more-users-info"> {user.fun} </p> : this.goals() }
+                  </div>
 
-                <h2 className="bucketList" onClick={this.editExtra.bind(this)}> What are 5 things you want to do before you die?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.bucketList  ? <p className="more-users-info"> {user.bucketList} </p> : this.goals() }
-                </div>
-                <div>
+                  <div className="interesting-info">
+                    <h2 className="bucketList" onClick={this.editExtra.bind(this)}> What are 5 things you want to do before you die?<img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.bucketList  ? <p className="more-users-info"> {user.bucketList} </p> : this.goals() }
+                  </div>
+                  <div className="interesting-info">
 
-                <h2 className="powers" onClick={this.editExtra.bind(this)}>  If you could have any superpower, what power would it be and why? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
-                { user.powers  ? <p className="more-users-info"> {user.powers} </p> : this.goals() }
-                </div>
-
-
+                  <h2 className="powers" onClick={this.editExtra.bind(this)}>  If you could have any superpower, what power would it be and why? <img className="edit-info-logo" src={require('../images/edit.png')} alt="logo" /></h2>
+                    { user.powers  ? <p className="more-users-info"> {user.powers} </p> : this.goals() }
+                  </div>
                 </div>
               </div>
             </div>
+
+            <div className="right-section"> 
+              <p> Just to put something here </p> 
+            </div>
+
           </div>
         </div>
       </div>

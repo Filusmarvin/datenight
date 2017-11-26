@@ -4,15 +4,12 @@ import { base } from '../rebase';
 import '../css/Signup.css'
 // import data from '../components/data.json'
 
-let gender = ""
-
-
 class Signup extends Component {
   constructor () {
     super()
     this.state = {
       boo: 1,
-      user:{}
+      gender: null
     }
   }
 
@@ -20,19 +17,76 @@ class Signup extends Component {
     this.setState({ user: this.props.user})
   }
   show(val){
-    let boo = this.state.boo
-    let value = val.target.innerHTML
-    console.log(this.props.user)
-    if( boo < 11){
+    console.log(val)
+    let boo = this.state.boo;
+    let value = val.target.innerHTML;
+    console.log(value.length);
+    let uid = this.props.match.params.uid;
+   let firstName = this.firstName.value;
+   let lastName = this.lastName.value;
+   let age = this.age.value;
+   let city = this.city.value;
+   let ethnicity = this.ethnicity.value;
+   let restaraunt = this.restaraunt.value;
+   let hobby = this.hobby.value;
+   let movie = this.movie.value;
+   let genre = this.genre.value;
+
+   if ( boo === 1){
+    this.setState({
+        boo: boo + 1
+      })
+   }
+    else if ( boo === 2 && firstName !== ""){
       this.setState({
         boo: boo + 1
       })
-    } else{
-      this.setNewUser(value)
+    } else if ( boo === 3 && lastName !== ""){
       this.setState({
         boo: boo + 1
       })
-    }
+    } else if ( boo === 4 && age !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 5 && ethnicity !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 6 && city !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 7 && value === "Male" ){
+      this.setState({
+        gender: "Male",
+        boo: boo + 1
+      })
+     } else if ( boo === 7 && value === "Female" ){
+      this.setState({
+        gender: "Female",
+        boo: boo + 1
+      })
+      console.log(this.state.gender)
+     } else if ( boo === 8 && restaraunt !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 9   && hobby !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 10 && movie !== ""){
+      this.setState({
+        boo: boo + 1
+      })
+    } else if ( boo === 11 && genre !== ""){
+      this.setNewUser()
+      this.setState({
+        boo: boo + 1
+      })
+      console.log(boo)
+    } 
   }
 
  newUser(e){
@@ -42,7 +96,7 @@ class Signup extends Component {
 
 
 
- setNewUser(){
+ setNewUser( ){
    let uid = this.props.match.params.uid
    let firstName = this.firstName.value
    let lastName = this.lastName.value
@@ -53,12 +107,14 @@ class Signup extends Component {
    let hobby = this.hobby.value
    let movie = this.movie.value
    let genre = this.genre.value
-   console.log( firstName, lastName, gender, city, age, ethnicity, restaraunt, hobby, movie, genre)
+   let gender = this.state.gender
+   console.log(gender)
+   console.log( firstName, lastName, gender, city, age, ethnicity, restaraunt, hobby, movie, genre, gender)
    base.update(`user/${uid}`,{
      data:{
        firstName:firstName,
        lastName:lastName,
-       age: age,
+       age:age,
        ethnicity: ethnicity,
        restaraunt:restaraunt,
        hobby:hobby,
@@ -92,13 +148,14 @@ class Signup extends Component {
         <button className={ display === 1 ? "next-button" : "hidden"} onClick={this.show.bind(this)}> Next </button>
       </header>
 
+      <div className="outer-box">
+
       <div className={display === 2 ? "box firstName" : "hidden"}>
         <p className="sign-up firstName"> First what is your First name? </p>
         <form onSubmit={this.newUser.bind(this)}>
           <input type="text" className="sign-up input-text" placeholder="First Name" style={{textAlign:"center"}}
           ref={(input) => { this.firstName = input }}/>
-          <br />
-          <button className={"sign-up sign-up-button"} onClick={ this.show.bind(this)}> Next </button>
+            <button className="sign-up sign-up-button" onClick={ this.show.bind(this)}> Next </button>
         </form>
       </div>
 
@@ -146,10 +203,12 @@ class Signup extends Component {
         <p className="sign-up gender"> What is your Gender? </p>
         <form onSubmit={this.newUser.bind(this)}>
         <div className="gender-button">
-          <button className='the-gender male' value="Male" ref={(input) => { this.Male = input} }
-          onClick={this.show.bind(this)} > Male </button>
-          <button className='the-gender female' value="Female" ref={(input) => { this.female = input} }
-          onClick={this.show.bind(this)}  > Female </button>
+
+          <button className='the-gender male' value="Male"
+          onClick={this.show.bind(this)} >Male</button>
+
+          <button className='the-gender female' value="Female" 
+          onClick={this.show.bind(this)} >Female</button>
         </div>
           <br />
           <button className="sign-up sign-up-button" onClick={ this.show.bind(this)} > Next </button>
@@ -197,7 +256,7 @@ class Signup extends Component {
           <button className="sign-up sign-up-button" onClick={ this.show.bind(this)} > Next </button>
         </form>
       </div>
-
+      </div>
       </div>
     );
   }

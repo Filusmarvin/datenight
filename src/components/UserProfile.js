@@ -20,7 +20,7 @@ class UserProfile extends Component {
     componentDidMount(){
       let user = this.state.user
       let users = this.state.users
-      let params = this.props.match.params.usersuid
+      let params = this.props.match.params.profile
       console.log(params)
       // set state to users
       base.fetch(`user/${params}`,{
@@ -51,17 +51,40 @@ class UserProfile extends Component {
     let dm = this.state.dm
     let user = this.state.user
     let uid = this.props.match.params.uid
-    let params = this.props.match.params.usersuid
+    let params = this.props.match.params.profile
     let index = this.props.match.params.index
+    console.log(params)
     return(
       <div className="profile-container">
         <header className="profile-header">
-          <img className="profile-image"src={user.photoURL} alt="pic"/>
-          <div className="profile-bio">
-            <p> {user.displayName} </p>
-            <p> {user.age} years old</p>
-            <p> Lives in {user.city}</p>
+          <div className="top-bio-sect">
+            <div className="profile-bio">
+              <p> {user.displayName} </p>
+              <p> {user.age} years old</p>
+              <p> Lives in {user.city}</p>
+            </div>
+            <img className="profile-image"src={user.photoURL} alt="pic"/>
+            <div className="profile-bio">
+             <p> Ethnicity: {user.ethnicity} </p>
+              <p> Movie: {user.movie} </p>
+              <p> Hobby: {user.hobby} </p>
+            </div>
           </div>
+          <div className="bottom-bio-sect">
+            <div className="action-buttons">
+              <div className="button-box">
+                <button className="user-button like-button"> Like </button>
+                <Link to={`/user/${uid}/profile/${params}/message`} className="user-button message-button"> Message </Link>
+                <Link to={`/user/${uid}/profile/${params}/common`}  className="user-button similarity-button"> View similarities</Link>
+              </div>
+              <div>
+                <button className="user-button"> Favorites </button>
+                <button className="user-button"> Wink </button>
+                <button className="user-button"> Poke </button>
+              </div>
+            </div>
+          </div>
+        </header>
           <div className="few-things">
             <h2> A few things about me is.....</h2>
             <p> My name is {user.firstName}</p>
@@ -69,12 +92,6 @@ class UserProfile extends Component {
             <p> My favorite Movie is {user.movie}</p>
             <p> I love to eat at {user.restaraunt}</p>
           </div>
-          <div className="button-box">
-            <button className="user-button like-button"> Like </button>
-            <Link to={`/user/${uid}/profile/${params}/message`} className="user-button message-button"> Message </Link>
-            <Link to={`/user/${uid}/profile/${params}/common`}  className="user-button similarity-button"> View similarities</Link>
-          </div>
-        </header>
         <div className="everything-else">
           <div className="center-div">
             <h2> My Self Summary! </h2>

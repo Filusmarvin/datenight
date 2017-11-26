@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import "../css/Users.css";
+import "../css/UsersColumn.css";
 import { base, app} from '../rebase';
 import firebase from 'firebase';
 
-class Users extends Component {
+class UsersColumn extends Component {
   constructor() {
     super()
     this.state = {
@@ -53,4 +53,4 @@ class Users extends Component {
   }
 }
 
-export default Users
+export default UsersColumn

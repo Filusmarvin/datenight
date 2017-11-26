@@ -19,7 +19,7 @@ class Login extends Component {
   signIn(){
     let email = this.email.value;
     let password = this.password.value;
-    this.props.logInWithUserNameAndPassword(email, password)
+    this.props.loginWithUsernameAndPassword(email, password);
   }
 
   render() {
@@ -75,8 +75,8 @@ class Login extends Component {
               <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
               <a href="//Facebook.com" className="facebook-hover-box"> Log into Facebook first to log in </a>
             </div>
-            <button className="log-button twitter hvr-grow" > Login with Twitter </button>
-            <button className="log-button google hvr-grow" > Login with Gmail </button>
+            <button className="log-button twitter hvr-grow" onClick={this.props.loginWithTwitter.bind(this)}> Login with Twitter </button>
+            <button className="log-button google hvr-grow" onClick={this.props.loginWithGoogle.bind(this)}> Login with Gmail </button>
           </div>
         </div>
       </container>

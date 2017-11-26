@@ -40,14 +40,15 @@ class App extends Component {
         location:obj.data.location
       })
     })
+    console.log(this.state.user)
 }
 
 
   setUserState (user) {
-    let uid = user.uid
+    let uid = user !== null ? user.uid : 'nothing';
     let userState = this.state.user
-    // console.log(uid)
-    this.setState({ user: { ...userState,
+    if ( user !== null ){
+      this.setState({ user: { ...userState,
       displayName: user.displayName,
       photoURL:user.photoURL,
       phoneNumber: user.phoneNumber,
@@ -55,13 +56,14 @@ class App extends Component {
       uid: user.uid
     }})
 
-    base.fetch(`user`, {
-      context: this,
-      asArray: false,
-      then(data){
-        this.setState({ users : data })
-      }
-    })
+      base.fetch(`user`, {
+        context: this,
+        asArray: false,
+        then(data){
+         this.setState({ users : data })
+        }
+      })
+    }
 
     if(user){
       let uid = user.uid
@@ -75,18 +77,19 @@ class App extends Component {
           uid: user.uid
         }
       })
-    }
 
-    base.fetch(`user/${uid}`,{
-      context:this,
-      asArray:false,
-      then(data){
-        // console.log(user,data)
-        this.setState({
-          user: {...user, ...data}
-        })
-      }
-    })
+
+      base.fetch(`user/${uid}`,{
+        context:this,
+        asArray:false,
+        then(data){
+          // console.log(user,data)
+          this.setState({
+            user: {...user, ...data}
+          })
+        }
+      })
+    }
   }
 
   updateState(){
@@ -118,8 +121,48 @@ class App extends Component {
   }
 
 
+  loginWithUsernameAndPassword( email , password){
+    console.log(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password)
+    .catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  if (errorCode === 'auth/wrong-password') {
+    alert('Wrong password.');
+  } else {
+    alert(errorMessage);
+  }
+  console.log(error);
+});
+  }
+
   loginWithFacebook() {
     firebase.auth().signInWithRedirect(provider)
+  }
+
+  loginWithGoogle(){
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('profile');
+    provider.addScope('email');
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // This gives you a Google Access Token.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+    });
+  }
+
+  loginWithTwitter(){
+    // Using a popup.
+    var provider = new firebase.auth.TwitterAuthProvider();
+    firebase.auth().signInWithPopup(provider).then(function(result) {
+      // For accessing the Twitter API.
+      var token = result.credential.accessToken;
+      var secret = result.credential.secret;
+      // The signed-in user info.
+      var user = result.user;
+    });
   }
 
   userName (info){
@@ -164,9 +207,17 @@ displayName () {
   // setUserState={this.setUserState} user={this.state.user} changeBoo={this.changeBoo.bind(this)}
   // {...pickles} /> ) : (<Redirect to={`/user/${uid}`} />))} />
   getEvents(location) {
-      axios.get(`https://tiy-orl-proxy.herokuapp.com/eventful?app_key=V5W6PxsWgHLxCZTb&where=${location[1]},${location[2]}&within=25&date=Next%20Week&sort_order=popularity`)
-      .then(response => this.setState({ localEvents: response.data.events.event }))
-    }
+    axios.get(`https://tiy-orl-proxy.herokuapp.com/eventful?app_key=V5W6PxsWgHLxCZTb&where=${location[1]},${location[2]}&within=25&date=Next%20Week&sort_order=popularity`)
+    .then(response => this.setState({ localEvents: response.data.events.event }))
+  }
+
+  clear(){
+    this.setState({
+      users:{}
+    })
+    console.log("hello")
+  }
+
 
   render() {
     let loggedin = app.auth().currentUser ? true : false
@@ -179,24 +230,28 @@ displayName () {
 
       <header className="main-head">
       <div className="logo" >
-        <Link to="/home" > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
+        <Link to={`/${uid}/users`} > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
       </div>
       <nav className="header-nav">
-        <Link to="/Home" className="hvr-grow header-name"> Browse users </Link>
+        <Link to={`/${uid}/users`} className="hvr-grow header-name"> Browse users </Link>
         <Link to={`/user/${uid}`} className="hvr-grow header-name"> My Account</Link>
         <Link to={`/user/${uid}/search`}className="hvr-grow header-name"> Search places </Link>
          <span onClick={this.logOut.bind(this)}><Link to="/" className="hvr-grow header-name"> Log Out </Link> </span>
         <img className="menu" src={user.photoURL} alt="" />
       </nav>
       </header>
+
+  {/* Login Js` */}
         <Route exact path="/" render={(pickles) =>( loggedin ? ( <Redirect to={`/signup/${uid}`} />) :
-      (<Login loginWithFacebook={this.loginWithFacebook.bind(this)}/>))}/>
+      (<Login loginWithFacebook={this.loginWithFacebook.bind(this)} loginWithUsernameAndPassword={this.loginWithUsernameAndPassword.bind(this)}
+        loginWithGoogle={this.loginWithGoogle.bind(this)} loginWithTwitter={this.loginWithTwitter.bind(this)}
+        />))}/>
 
+  {/* Home Js */}
+      <Route exact path={`/:uid/users`} render={(pickles) =>
+        <Home logOut={this.logOut.bind(this)} users={this.state.users} user={this.state.user} {...pickles} />} />
 
-      <Route exact path="/Home" render={(pickles) =>
-        <Home logOut={this.logOut.bind(this)} users={this.state.users}{...pickles} />} />
-
-
+  {/* User Account Js */}
         <Route exact path={`/user/:uid`} render={(pickles) =>
           <UserAccount user={this.state.user}  logOut={this.logOut.bind(this)}
           userName={this.userName.bind(this)}
@@ -214,7 +269,7 @@ displayName () {
           <Search user={this.state.user} logOut={this.logOut.bind(this)}
            {...pickles} />} />
 
-        <Route exact path="/user/:uid/profile/:index" render={(pickles) =>
+        <Route exact path="/user/:uid/profile/:profile/id/:index" render={(pickles) =>
         <UserProfile user={this.state.user} users={this.state.users}{...pickles}/> } />
 
 

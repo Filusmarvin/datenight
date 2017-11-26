@@ -15,14 +15,20 @@ class Home extends Component {
 
     componentWillReceiveProps(props){
       let user = this.props.user
-      // this is to set the user
-      base.fetch(`user/${user.uid}` ,{
-        context: this,
-        asArray: false,
-        then(data){
-          this.setState({ user: data})
-        }
+      console.log(user.uid)
+      this.setState({
+        user:user
       })
+      console.log(this.state.user)
+      // this is to set the user
+      // base.fetch(`user/${user.uid}` ,{
+      //   context: this,
+      //   asArray: false,
+      //   then(data){
+      //     this.setState({ user: data})
+      //     console.log(data)
+      //   }
+      // })
     }
 
     componentDidMount(){
@@ -37,10 +43,9 @@ class Home extends Component {
     }
 
   showUser(){
-    let users = this.state.users
-    let user = this.state.user
-    let uid = this.props.match.params.uid
-    // console.log(users[0]);
+    let users = this.state.users;
+    let user = this.state.user;
+    let uid = this.props.match.params.uid;
       return users.map((users,index) => {
         return(
           <div className="user-pic" key={index}>
@@ -67,6 +72,7 @@ class Home extends Component {
 
 
   render() {
+    let user = this.state.user
     return (
       <div>
         <div className="search-users">

@@ -27,6 +27,7 @@ class UserAccount extends Component{
 
   componentDidMount () {
     let uid = this.props.match.params.uid
+    console.log(this.props.match)
     axios.post("https://www.googleapis.com/geolocation/v1/geolocate?key=AIzaSyAhoxu3waM5qMIQHwXGZ4Gcq7VuDcRohtU")
     .then(obj => {
       this.setState({

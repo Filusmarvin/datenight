@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 // import  { Link } from 'react-router-dom'
 import { base } from '../rebase';
-import '../css/Signup.css'
+import '../css/Signup.css';
+import $ from "jquery";
 // import data from '../components/data.json'
 
 class Signup extends Component {

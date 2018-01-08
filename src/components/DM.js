@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import {base , app } from '../rebase';
 import Sound from 'react-sound';
-import '../css/DM.css'
+import '../css/DM.css';
+import $ from "jquery";
 
 
 class DM extends Component {
@@ -13,7 +14,8 @@ class DM extends Component {
       users: [],
       messages: [],
       other:{},
-      dm:true
+      dm:true,
+      dmsetting: false
     }
   }
 
@@ -46,6 +48,12 @@ class DM extends Component {
       then(data){
         this.setState({ other:data})
       }
+    })
+    $('.dm.header').on('click', function(){
+      console.log("hello")
+    })
+    $(".dmsettings").on('click',function(){
+      
     })
 
   }
@@ -114,14 +122,15 @@ class DM extends Component {
     }
   }
 
+
   render () {
     let dm = this.state.dm
     let messages = this.state.messages;
     let user = this.state.user;
     let other = this.state.other
     return(
-      <div className={dm ? "DM-container" : "bar" }>
-        <header onClick={this.dm.bind(this)}> Messaging {other.firstName}</header>
+      <div className={dm ? "DM-container dm-border" : "bar" }>
+        <header className="dm-header" onClick={this.dm.bind(this)}> Messaging {other.firstName}</header>
         <div className={dm ? "Messages" : "hidden-message"}> {messages.map((message, index) => {
           return(
             <div className="each-message" key={index}>
@@ -132,10 +141,11 @@ class DM extends Component {
         })}</div>
         <div className={ dm ? "form-box" : "hidden-message"}>
           <form onSubmit={this.sendMessage.bind(this)}>
-            <textarea type="text" ref={ (input) => {this.input = input }} placeholder="Type your message here"/>
+            <textarea className="dm-textarea" type="text" ref={ (input) => {this.input = input }} placeholder="Type your message here"/>
             <br />
             <button > Send Message</button>
           </form>
+          <button className="dmsettings"> Settings </button>
         </div>
       </div>
     )

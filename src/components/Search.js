@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
- import {Link } from 'react-router-dom'
-import axios from 'axios'
-import '../css/search.css'
+ import {Link } from 'react-router-dom';
+import axios from 'axios';
+import '../css/search.css';
 import {base } from '../rebase';
-const movieKey = "81599007ff214265c13a0888da791d0c"
-// const dinnerKey = "31060f9bfe02586b"
-// const dinKey ="179f6b05297ee5efce0b417a891b2dc5"
-// const googleKey="AIzaSyAhoxu3waM5qMIQHwXGZ4Gcq7VuDcRohtU"
+import $ from "jquery";
+const movieKey = "81599007ff214265c13a0888da791d0c";
+// const dinnerKey = "31060f9bfe02586b";
+// const dinKey ="179f6b05297ee5efce0b417a891b2dc5";
+// const googleKey="AIzaSyAhoxu3waM5qMIQHwXGZ4Gcq7VuDcRohtU";
 
 
 class UserAccount extends Component{
@@ -42,10 +43,10 @@ class UserAccount extends Component{
         this.setState({
           favMovies: [data]
         })
-        console.log(this.state.favMovies)
       }
     })
 
+    $(".hide").hide(20000);
   }
 
 
@@ -193,7 +194,12 @@ class UserAccount extends Component{
 
     return (
       <div>
-        <header className="search-header">
+      <div className="hide">
+        <h2> Page is still under construction. We will let you know when it is up and running.  </h2>
+        <h2> Also, when you click search, please allow it about 30 seconds for the search results </h2>
+      </div>
+        <div> 
+          <header className="search-header">
           <h1> Your Favorite Movies and Dinner Locations</h1>
         </header>
 
@@ -272,6 +278,7 @@ class UserAccount extends Component{
           </div>
 
 
+        </div>
         </div>
       </div>
     )

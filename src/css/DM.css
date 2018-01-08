@@ -4,7 +4,7 @@
   overflow: scroll;
   flex-direction: column;
   height: 100%;
-
+  background-color: white;
 }
 
 .DM-container header{
@@ -15,6 +15,11 @@
   width: 300px;
   text-align: center;
   display: flex;
+  border:1px solid black;
+}
+
+.dm-border{
+  border: 1px solid black;
 }
 
 .bar header{
@@ -60,4 +65,11 @@
 
 .bar{
   transform: translateY(360px);
+}
+
+.dm-textarea{
+  max-width:300px; 
+  max-height:50px;
+  min-width:300px;
+  min-height:;
 }

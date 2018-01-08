@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "../css/Users.css";
 import { base, app} from '../rebase';
 import firebase from 'firebase';
+import $ from "jquery";
 
 class Users extends Component {
   constructor() {

@@ -87,11 +87,12 @@ img{
   width: 400px;
   height: 90px;
   background-color: #f3f5f9;
-  font-size: 18px;
+  font-size: 25px;
   padding-left:0;
   padding-top:0;
   padding-bottom:0.4em;
   padding-right: 0.4em;
+  border: 1px solid black;
 }
 .bio-button{
   /*position: relative;
@@ -163,19 +164,49 @@ width: 680px;
 .extra-text-box{
   opacity: .2;
   width: 500px;
-  height: 100px;
+  height: 40px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #104da1;
+  outline: none;
+  font-size: 30px;
+  max-width: 500px;
+  min-width: 400px;
+  max-height: 80px;
+  min-height: 40px;
 }
 
 .extra-text-box:active{
   opacity: 1;
   width: 500px;
-  height: 100px;
+  height: 40px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #104da1;
+  outline: none;
+  font-size: 30px;
+  max-width: 500px;
+  min-width: 400px;
+  max-height: 80px;
+  min-height: 40px;
 }
 
 .extra-text-box:focus{
   opacity: 1;
   width: 500px;
-  height: 100px;
+  height: 40px;
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-bottom: 1px solid #104da1;
+  outline: none;
+  font-size: 30px;
+  max-width: 500px;
+  min-width: 400px;
+  max-height: 80px;
+  min-height: 40px;
 }
 
 .save-extra-button{

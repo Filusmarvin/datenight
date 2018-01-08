@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import $ from "jquery";
 // import {Link } from 'react-router-dom';
 // import { app } from '../rebase';
 import "../css/useraccount.css";
 import UsersColumn from "./UsersColumn.js";
 import { base } from '../rebase';
+import $ from "jquery";
 
 
 class UserAccount extends Component{
@@ -73,7 +73,7 @@ class UserAccount extends Component{
        <div>
        <h1 className="bio-h1"> Tell me about yourself! </h1>
         <form onSubmit={this.addBio.bind(this)}>
-          <textarea className="bio-input" type="text"
+          <textarea className="bio-input" type="text" contenteditable="true"
           ref={(textarea) => {this.text = textarea} }/>
           <div>
             <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>

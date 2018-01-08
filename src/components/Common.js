@@ -3,6 +3,7 @@ import  { Link } from 'react-router-dom';
 // import {base } from '../rebase';
 import axios from 'axios'
 import '../css/common.css';
+import $ from "jquery";
 const movieKey = "81599007ff214265c13a0888da791d0c";
 
 

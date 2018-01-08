@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import  { Link } from 'react-router-dom'
+import  { Link } from 'react-router-dom';
 import {base } from '../rebase';
-import '../css/home.css'
+import '../css/home.css';
+import $ from "jquery";
 
 
 class Home extends Component {

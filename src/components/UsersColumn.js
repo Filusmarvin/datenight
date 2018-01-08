@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import "../css/UsersColumn.css";
 import { base, app} from '../rebase';
 import firebase from 'firebase';
+import $ from "jquery";
 
 class UsersColumn extends Component {
   constructor() {

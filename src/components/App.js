@@ -1,20 +1,22 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import {Redirect} from 'react-router'
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import {Redirect} from 'react-router';
 import '../css/hover.css';
-import '../css/app.css'
-import Login from './Login.js'
-// import Footer from  './Footer.js'
-import Signup from './SignUp.js'
-import Home from './Home.js'
+import '../css/app.css';
+import Login from './Login.js';
+// import Footer from  './Footer.js';
+import Signup from './SignUp.js';
+import Home from './Home.js';
 import {base , app } from '../rebase';
-import firebase from 'firebase'
-import UserAccount from './UserAccount.js'
-import Search from './Search.js'
-import axios from 'axios'
-import UserProfile from './UserProfile.js'
-import Common from './Common.js'
-let eventKey = "kzLJCk4t3WPN7Pk5"
+import firebase from 'firebase';
+import UserAccount from './UserAccount.js';
+import Search from './Search.js';
+import axios from 'axios';
+import UserProfile from './UserProfile.js';
+import Common from './Common.js';
+import Chat from './Chat.js';  
+import $ from "jquery";
+let eventKey = "kzLJCk4t3WPN7Pk5";
 
 var provider = new firebase.auth.FacebookAuthProvider();
 
@@ -275,6 +277,10 @@ displayName () {
 
         <Route exact path="/user/:uid/profile/:index/common" render={(pickles) =>
         <Common user={this.state.user} users={this.state.users}{...pickles}/> } />
+
+      {/* Messages */} 
+      <Route exact path="/user/:uid/profile/:profile/message" render={(pickles) => 
+        <Chat {...pickles} /> } />
 
       </div>
       </Router>

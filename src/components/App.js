@@ -50,13 +50,16 @@ class App extends Component {
     let uid = user !== null ? user.uid : 'nothing';
     let userState = this.state.user
     if ( user !== null ){
-      this.setState({ user: { ...userState,
-      displayName: user.displayName,
-      photoURL:user.photoURL,
-      phoneNumber: user.phoneNumber,
-      email: user.email,
-      uid: user.uid
+      this.setState({ 
+        uid: user.uid , 
+        user: { ...userState,
+        displayName: user.displayName,
+        photoURL:user.photoURL,
+        phoneNumber: user.phoneNumber,
+        email: user.email,
+        uid: user.uid
     }})
+      console.log(user.uid)
 
       base.fetch(`user`, {
         context: this,
@@ -230,7 +233,7 @@ displayName () {
       <Router>
       <div>
 
-      <header className="main-head">
+      <header className={ uid ? "main-head" : "hidden"} >
       <div className="logo" >
         <Link to={`/${uid}/users`} > <img className="logo-image" src={require("../images/heart.jpeg")} alt="DND" /></Link>
       </div>
@@ -239,7 +242,7 @@ displayName () {
         <Link to={`/user/${uid}`} className="hvr-grow header-name"> My Account</Link>
         <Link to={`/user/${uid}/search`}className="hvr-grow header-name"> Search places </Link>
          <span onClick={this.logOut.bind(this)}><Link to="/" className="hvr-grow header-name"> Log Out </Link> </span>
-        <img className="menu" src={user.photoURL} alt="" />
+        {this.state.user ? <img className="menu" src={user.photoURL} alt="" /> : null } 
       </nav>
       </header>
 
@@ -278,9 +281,9 @@ displayName () {
         <Route exact path="/user/:uid/profile/:index/common" render={(pickles) =>
         <Common user={this.state.user} users={this.state.users}{...pickles}/> } />
 
-      {/* Messages */} 
+      {/* Messages aka Chat.js */} 
       <Route exact path="/user/:uid/profile/:profile/message" render={(pickles) => 
-        <Chat {...pickles} /> } />
+        <Chat user={this.state.user} users={this.state.users} {...pickles} /> } />
 
       </div>
       </Router>

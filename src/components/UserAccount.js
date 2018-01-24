@@ -73,8 +73,7 @@ class UserAccount extends Component{
        <div>
        <h1 className="bio-h1"> Tell me about yourself! </h1>
         <form onSubmit={this.addBio.bind(this)}>
-          <textarea className="bio-input" type="text" contenteditable="true"
-          ref={(textarea) => {this.text = textarea} }/>
+          <textarea className="bio-input" type="text" ref={(textarea) => {this.text = textarea} }/>
           <div>
             <button onClick={this.addBio.bind(this)} className="bio-button"> Enter </button>
             <button onClick={this.updateBio.bind(this) } className="bio-cancel-button"> Cancel</button>
@@ -103,7 +102,8 @@ class UserAccount extends Component{
   goals(){
     return(
       <form onSubmit={this.addGoal.bind(this)}>
-        <textarea className="extra-text-box" placeholder="Make it interesting :) "type="text" ref={(textarea) => {this.text = textarea} }/>
+        <textarea className="extra-text-box" placeholder="Make it interesting :)" 
+        type="text" ref={(textarea) => {this.text = textarea} }/>
         <div className="save-cancel-div"> 
           <button  className="save save-extra-button"> Save </button>
           <button  className=" cancel save-extra-button"> Cancel </button>

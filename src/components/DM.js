@@ -27,7 +27,7 @@ class DM extends Component {
     let user = this.state.user
     let uid = this.props.uid
     let params = this.props.params
-    console.log(uid , params);
+    console.log(this.props);
     base.syncState(`user/${uid}/Chat/${params}/message`, {
       context: this,
       state: 'messages',
@@ -50,7 +50,7 @@ class DM extends Component {
       }
     })
     $('.dm.header').on('click', function(){
-      console.log("hello")
+     // console.log("hello")
     })
     $(".dmsettings").on('click',function(){
       
@@ -62,11 +62,11 @@ class DM extends Component {
     const iPhone = new Audio();
     iPhone.src = ("../Sounds/iPhone.mp3");
 
-    console.log(prevState , props)
+    //console.log(prevState , props)
     let messages = this.state.messages
 
     if(props.messages.length < messages.length){
-      console.log(true)
+     // console.log(true)
       return(
         < Sound
         url="../Sounds/iPhone.mp3"
@@ -79,7 +79,7 @@ class DM extends Component {
         {...props}/>
       )
     } else{
-      console.log(false)
+      //console.log(false)
     }
   }
 
@@ -143,9 +143,9 @@ class DM extends Component {
           <form onSubmit={this.sendMessage.bind(this)}>
             <textarea className="dm-textarea" type="text" ref={ (input) => {this.input = input }} placeholder="Type your message here"/>
             <br />
-            <button > Send Message</button>
+            <button> Send Message </button>
           </form>
-          <button className="dmsettings"> Settings </button>
+          <button className="dmsettings" onClick={this.props.settings.bind(this)}> Settings </button>
         </div>
       </div>
     )

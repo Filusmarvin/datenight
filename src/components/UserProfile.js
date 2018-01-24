@@ -15,7 +15,9 @@ class UserProfile extends Component {
         otherUser:{},
         users:[],
         chatUser:{},
-        dm: true
+        dm: true,
+        settings: false,
+        color: "#104da1"
       }
     }
 
@@ -35,7 +37,7 @@ class UserProfile extends Component {
     }
 
     componentWillReceiveProps(props){
-      console.log(props)
+     // console.log(props)
       this.setState({
         user: props.user,
         users: props.users
@@ -58,14 +60,28 @@ class UserProfile extends Component {
       }
     }
 
+    settings(){
+      let settings = this.state.settings;
+      if( settings === true){
+        this.setState({ settings : false})
+      } else {
+        this.setState({ settings : true })
+      }
+    }
+
+    showSettings(){
+      alert('hello')
+    }
+
   render(){
-    let dm = this.state.dm
+    let dm = this.state.dm;
     let user = this.state.user
     let otherUser = this.state.otherUser
     let uid = this.props.match.params.uid
     let params = this.props.match.params.profile
     let index = this.props.match.params.index
-    console.log(params)
+    let settings = this.state.settings;
+    //console.log(user.photoURL)
     return(
       <div className="profile-container">
         <header className="profile-header">
@@ -75,7 +91,7 @@ class UserProfile extends Component {
               <p> {user.age} years old</p>
               <p> Lives in {user.city}</p>
             </div>
-            <img className="profile-image"src={user.photoURL} alt="pic"/>
+            <img className="profile-image" src={user.photoURL} alt="pic"/>
             <div className="profile-bio">
              <p> Ethnicity: {user.ethnicity} </p>
               <p> Movie: {user.movie} </p>
@@ -121,8 +137,12 @@ class UserProfile extends Component {
           <button onClick={this.user.bind(this)}> Somtyfsfjvo iklmvs</button>
         </div>
         <div className= "DM-comp" >
-          <DM className={dm ? null : 'bar'} params={params} dm={this.dm.bind(this)} user={user} uid={uid} />
+          <DM className={dm ? null : 'bar'} params={params} dm={this.dm.bind(this)} user={user} uid={uid} 
+          settings={this.settings.bind(this)}/>
         </div>
+        <div className={settings ? "settingsbox" : "hidden"}>
+          Hello World, I am right here on the bottom somewhere
+        </div> 
       </div>
     )
   }

@@ -1,4 +1,5 @@
 body{
+  height:100%;
   width: 1440px;
   margin:0px;
   padding:0px;
@@ -43,6 +44,10 @@ a:active {
 a{
   color: white;
   text-decoration: none;
+}
+
+label{
+  font-size: 20px;
 }
 
 .header-name:active{

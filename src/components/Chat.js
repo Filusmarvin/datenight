@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import {base , app } from '../rebase';
 import '../css/Chat.css';
 import $ from "jquery";
+import chatUsers from './chatUsers.js'
 
 
 
@@ -24,7 +25,10 @@ class Chat extends Component {
   componentDidMount(){
     let user = this.state.user;
     let messages = this.state.messages;
-    let uid = user.uid
+    let uid = user.uid;
+    let props = this.props;
+    console.log(props)
+
 
     base.fetch(`user/${uid}`,{
       context: this,
@@ -42,7 +46,11 @@ class Chat extends Component {
     let params = this.props.match.params.usersuid
     let user = this.state.user.uid
     return(
-      <div>
+      <div className="chatContainer">
+        < chatUsers />
+        <div>
+          <p> Hello </p> 
+        </div>
        
       </div>
     )

@@ -9,7 +9,53 @@ class Login extends Component {
     super()
     this.state = {
       user:{},
+      emailOne: "",
+      passOne: "",
+      emailTwo: "",
+      passTwo: ''
     }
+  }
+
+  componentDidMount(){
+    const that = this;
+    const passOne = this.state.passOne;
+    setTimeout(function(){
+      $(".login-header").attr('class', 'hid');
+      $('.login').attr('class', '.login-part-two');
+    }, 3000);
+
+    $('.login-form').on('submit', function(e){
+      e.preventDefault()
+      let emailOne = $('.emailOne').val(); 
+      if(emailOne.length !== 0){
+        that.setState({emailOne : emailOne });
+        $('.login-form').attr('class','hid2');
+        $('.hid3').attr('class', 'login-form2');
+        $('.passOne').val("")
+      }
+    })
+
+    $('.pass').on('submit',function(event){
+      event.preventDefault()
+      let passOne = $('.passOne').val();
+      console.log(passOne.length) ;
+      if(passOne.length !== 0){
+        that.setState({ passOne: passOne });
+      } else{ null }
+      $('.hid2').attr('class','login-form');
+      $('.login-form2').attr('class', 'hid3 pass');
+      that.signIn()
+    })
+    // Sign up for the first time
+    $('.first-time').on('click', function(){
+      $('.signIn-sec').attr('class', 'hid4');
+      $('.hid5').attr('class', 'signUp-sec');
+    })
+
+    $('.login-form3ogin').on('submit', function(e){
+      e.preventDefault();
+
+    })
   }
 
   signUp(){
@@ -19,68 +65,63 @@ class Login extends Component {
   }
 
   signIn(){
-    let email = this.email.value;
-    let password = this.password.value;
-    this.props.loginWithUsernameAndPassword(email, password);
+    let email = this.state.emailOne;
+    let password = this.state.passOne;
+    console.log(email, password)
+    if(this.state.passOne !== ""){
+      this.props.loginWithUsernameAndPassword(email, password);
+    }
   }
 
   render() {
     return (
       <container>
         <div className="container">
-          <header className="header">
-          <h1 className="app-name"> Some One To Love </h1>
-          </header>
-          <div className="log-in-or-signup">
-            <div className="intro">
-              <h1 className="intro-words"> Need help making plans on where to go? We can help! </h1>
-              <ul className='intro-words intro-ul'>
-                <li> Great Dinner Locations</li>
-                <li> Great Date  Locations</li>
-                <li> Dinner and a Date? say no more!</li>
-                <li>Sign up and check it out!</li>
-              </ul>
-            </div>
-            <div className="vertical-line"> </div>
-            <div className="logInOrSignUp">
-              <div className="right-side">
-                <div className="sign-up">
-                <h3 className="returning-user-h3"> Returning User? Log In here </h3>
-                <div className="sign-in">
-                  <div className="sign-in-username">
-                    <p className="login-email"> Email </p>
-                    <input type="text" className="login-user-input" ref={(input) => { this.email = input}} />
-                  </div>
-                  <div className="sign-in-password">
-                    <p className="login-password"> Password </p>
-                    <input type="password" className="login-user-input" ref={(input) => { this.password = input}} />
-                  </div>
-                  <button onClick={this.signIn.bind(this)}> Enter </button>
+          <header className="login-header">
+            <h1 className="header-animation-one"> Welcome to </h1>
+          </header>     
+          <section className="login">
+            <h1 className="header-animation-two">Date  Night</h1>
+            <div className="middle-sect"> 
+              <div className="left-login login-sec">
+                <p> Just to pus something here </p>
+              </div>
+
+              <div className="middle-login login-sec">
+                <div className="signIn-sec">  
+                  <h1> Please Log In </h1>
+                  <form className="login-form"> 
+                    <label> Email </label>
+                    <input className="emailOne" type="text" autoFocus />
+                  </form>
+
+                  <form className="hid3 pass"> 
+                    <label> Password </label>
+                    <input type="password" className="passOne" />
+                  </form>
+
+                  <p className="first-time hvr-grow"> Click here to sign up for the first time </p>
                 </div>
 
-                  <h3> No account? Please Sign up!</h3>
-                  <div className="div-user">
-                    <p className="login-email"> Email </p>
-                    <input type="text" className="login-user-input" ref={ (input)=> {this.User = input}} />
-                  </div>
-                    <div className="div-password">
-                      <p className="login-password" > Password </p>
-                      <input type="text" className="login-password-input"  ref={ (input)=> {this.Password = input}} />
-                    </div>
-                    <button onClick={this.signUp.bind(this)}> Enter </button>
+                <div className="hid5">
+                  <h2> To sign up enter an email address </h2>
+                  <form className="login-form3"> 
+                    <label> Email </label>
+                    <input className="emailTwo" type="text" />
+                  </form>
+
+                  <form className="hid4 pass"> 
+                    <label> Password </label>
+                    <input type="password" className="passTwo" />
+                  </form>
                 </div>
               </div>
+              <div className="right-login login-sec">
+                <p> Just to put something here </p>
+              </div>
             </div>
-          </div>
-          <div className="login-methods">
-            <div className="facebook-box fcebook">
-              <button className="log-button hvr-grow" onClick={this.props.loginWithFacebook.bind(this)}> Login with Facebook </button>
-              <a href="//Facebook.com" className="facebook-hover-box"> Log into Facebook first to log in </a>
-            </div>
-            <button className="log-button twitter hvr-grow" onClick={this.props.loginWithTwitter.bind(this)}> Login with Twitter </button>
-            <button className="log-button google hvr-grow" onClick={this.props.loginWithGoogle.bind(this)}> Login with Gmail </button>
-          </div>
-        </div>
+          </section> 
+        </div>     
       </container>
     );
   }
